@@ -30,7 +30,7 @@
         android:layout_centerHorizontal="true"
         android:src="@drawable/settings_text" />
 
-    <ImageButton
+     <ImageButton
         android:id="@+id/hamburgerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
