@@ -5,12 +5,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <fragment android:name="com.example.savethatdish.SelectionFragment"
-          android:id="@+id/selectionFragment"
+    <fragment android:name="com.example.savethatdish.DishListFragment"
+          android:id="@+id/dishListFragment"
           android:layout_width="match_parent"
           android:layout_height="match_parent" />
     <fragment android:name="com.example.savethatdish.SplashFragment"
           android:id="@+id/splashFragment"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" />
+    <fragment android:name="com.example.savethatdish.LoadFragment"
+          android:id="@+id/loadFragment"
           android:layout_width="match_parent"
           android:layout_height="match_parent" />
     <fragment android:name="com.facebook.widget.UserSettingsFragment"

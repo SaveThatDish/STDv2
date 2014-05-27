@@ -3,7 +3,7 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:orientation="vertical"
-              android:background="@drawable/login_background" >
+              android:background="@drawable/login_background"  >
               
     	<ImageView
                 android:id="@+id/splash_name"
@@ -21,8 +21,7 @@
                 android:layout_marginBottom="25dp"
                 android:src="@drawable/logo" />
 
-    	<com.facebook.widget.LoginButton
-    	    	xmlns:facebook="http://schemas.android.com/apk/res-auto"
+    	<ImageButton
             	android:id="@+id/login_button"
             	android:background="@drawable/button_animation"
             	android:layout_width="wrap_content"
@@ -30,8 +29,6 @@
             	android:layout_centerHorizontal="true"
                 android:layout_below="@id/splash_name"
             	android:layout_marginTop="25dp"
-            	facebook:login_text=""
-        		facebook:logout_text=""
         		style="@style/FacebookLoginButton" />
 
 </RelativeLayout>
