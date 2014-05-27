@@ -45,7 +45,11 @@ public class SearchActivity extends Activity {
 				results.clear();
 				String query = searchText.getText().toString();
 				String locationQuery = locationText.getText().toString();
-				new SearchTask().execute(query, locationQuery);
+				
+				if (query != null && (query.length() != 0) && locationQuery != null 
+						&& (locationQuery.length() != 0))
+					//make sure the search had something in it
+					new SearchTask().execute(query, locationQuery);
 			}
 		});
 	}
