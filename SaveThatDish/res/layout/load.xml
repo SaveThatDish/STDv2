@@ -11,6 +11,6 @@
     android:layout_gravity="center"
     android:textColor="#333"
     android:textSize="18sp"
-    android:text="SUP DAUUUG YOU NOW LOGGED IN YO."  />
+    android:text="Loading..."  />
 
 </LinearLayout>

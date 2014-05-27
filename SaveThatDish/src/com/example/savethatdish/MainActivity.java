@@ -7,104 +7,96 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
-import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
-import com.parse.ParseUser;
-import com.parse.ParseException;
 
 public class MainActivity extends FragmentActivity {
 	
-	private static final int SPLASH = 0;
-	private static final int SELECTION = 1;
-	private static final int SETTINGS = 2;
-	private static final int FRAGMENT_COUNT = SETTINGS +1;
+	public static final int SPLASH = 0;
+	public static final int DISHLIST = 1;
+	public static final int SETTINGS = 2;
+	public static final int LOAD = 3;
+	private static final int FRAGMENT_COUNT = LOAD + 1;
 
+	private boolean loading;
 	private boolean isResumed = false;
 	private MenuItem settings;	// Menu item in settings
 	private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
 	private UiLifecycleHelper uiHelper;
 	private Session.StatusCallback callback = 
-		    new Session.StatusCallback() {
-		    @Override
-		    public void call(Session session, 
-		            SessionState state, Exception exception) {
-		        onSessionStateChange(session, state, exception);
-		    }
-		};
+		new Session.StatusCallback() {
+		@Override
+        public void call(Session session, 
+        	SessionState state, Exception exception) {
+		   	Session session2 = ParseFacebookUtils.getSession();
+	        onSessionStateChange(session2, state, exception);
+	    }
+	};
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    
-	    Intent intent = new Intent(this, SearchActivity.class);
-	    startActivity(intent);
+		super.onCreate(savedInstanceState);
+		    
+	    Log.w("TEST", "Mainactivity onCreate()");
+		
+	    // ---------------UNCOMMENT TO TEST APP WITHOUT NEEDING TO LOGIN------------------
+		//Intent intent = new Intent(this, SearchActivity.class);
+		//startActivity(intent);
+		// -------------------------------------------------------------------------------	
 	    
 	    uiHelper = new UiLifecycleHelper(this, callback);
-	    uiHelper.onCreate(savedInstanceState);
-	    
-	    // Initialize parse
+	    uiHelper.onCreate(savedInstanceState);		    
+		    
+		// Initialize parse
 	    Parse.initialize(this, "dmq07tEG39xubkof59l2UyXnZJcojifl3jlYQ0af", 
 	    		"U0Lsnx5qHCdXTzPBtb8NMlInEApUUFEDq1q0gW83");
-	    /*
+		  
 	    ParseFacebookUtils.initialize("311859808965504");
-	    
-	    ParseFacebookUtils.logIn(this, new LogInCallback() {
-	    	  @Override
-	    	  public void done(ParseUser user, ParseException err) {
-	    	    if (user == null) {
-	    	      Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
-	    	    } else if (user.isNew()) {
-	    	      Log.d("MyApp", "User signed up and logged in through Facebook!");
-	    	    } else {
-	    	      Log.d("MyApp", "User logged in through Facebook!");
-	    	    }
-	    	  }
-	    	}); */
-	    
+		    
 	    setContentView(R.layout.activity_main);
-	    
-	    /* MANAGE FRAGMENTS */
+		   
+
+		/* MANAGE FRAGMENTS */
 	    FragmentManager fm = getSupportFragmentManager();
 	    fragments[SPLASH] = fm.findFragmentById(R.id.splashFragment);
-	    fragments[SELECTION] = fm.findFragmentById(R.id.selectionFragment);
+	    fragments[DISHLIST] = fm.findFragmentById(R.id.dishListFragment);
 	    fragments[SETTINGS] = fm.findFragmentById(R.id.userSettingsFragment);
+	    fragments[LOAD] = fm.findFragmentById(R.id.loadFragment);
 
 	    FragmentTransaction transaction = fm.beginTransaction();
 	    for(int i = 0; i < fragments.length; i++) {
-	        transaction.hide(fragments[i]);
+	        transaction.hide(fragments[i]);	
 	    }
 	    transaction.commit();
 	}
 	
-	private void showFragment(int fragmentIndex, boolean addToBackStack) {
+	public void showFragment(int fragmentIndex, boolean addToBackStack) {
+		Log.w("TEST", "Mainactivity showFragment() with fragmentIndex: " + fragmentIndex);
 		FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
+	    FragmentTransaction transaction = fm.beginTransaction();
         for (int i = 0; i < fragments.length; i++) {
-            if (i == fragmentIndex) {
-                transaction.show(fragments[i]);
-            } else {
-                transaction.hide(fragments[i]);
-            }
-        }
-        if (addToBackStack) {
-            transaction.addToBackStack(null);
-        }
-        transaction.commit();
+        	if (i == fragmentIndex) {
+	            transaction.show(fragments[i]);
+	        } else {
+	        	transaction.hide(fragments[i]);
+	        }
+	    }
+	    if (addToBackStack) {
+	        transaction.addToBackStack(null);
+	    }
+	    transaction.commit();
 	}
 	
 	@Override
 	public void onResume() {
 	    super.onResume();
+	    Log.w("TEST", "Mainactivity onResume()");
 	    uiHelper.onResume();
 	    isResumed = true;
 	}
@@ -112,6 +104,7 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	public void onPause() {
 	    super.onPause();
+	    Log.w("TEST", "Mainactivity onPause()");
 	    uiHelper.onPause();
 	    isResumed = false;
 	}
@@ -119,12 +112,16 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 	    super.onActivityResult(requestCode, resultCode, data);
+	    ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
+	    Log.w("TEST", "Mainactivity onActivityResult called");
+	    loading = true;
 	    uiHelper.onActivityResult(requestCode, resultCode, data);
 	}
 
 	@Override
 	public void onDestroy() {
 	    super.onDestroy();
+	    Log.w("TEST", "Mainactivity onDestroy()");
 	    uiHelper.onDestroy();
 	}
 
@@ -135,8 +132,10 @@ public class MainActivity extends FragmentActivity {
 	}
 	
 	private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+		Log.w("TEST", "Mainactivity session state changing");
 	    // Only make changes if the activity is visible
 	    if (isResumed) {
+	    	Log.w("TEST", "Mainactivity is resumed");
 	        FragmentManager manager = getSupportFragmentManager();
 	        // Get the number of entries in the back stack
 	        int backStackSize = manager.getBackStackEntryCount();
@@ -144,14 +143,21 @@ public class MainActivity extends FragmentActivity {
 	        for (int i = 0; i < backStackSize; i++) {
 	            manager.popBackStack();
 	        }
-	        if (state.isOpened()) {
+	        if (session != null && session.isOpened()) {
+	        	Log.w("TEST", "Session is open");
 	            // If the session state is open:
 	            // Show the authenticated fragment
-	            showFragment(SELECTION, false);
-	        } else if (state.isClosed()) {
-	            // If the session state is closed:
-	            // Show the login fragment
-	            showFragment(SPLASH, false);
+	            showFragment(DISHLIST, false);
+	        } else if (session != null && session.isClosed()) {
+	        	Log.w("TEST", "Session is closed");
+	        	if(loading) {
+	        	   loading = false;
+	        	   showFragment(LOAD, false);
+	        	} else {
+	               // If the session state is closed:
+	               // Show the login fragment
+	               showFragment(SPLASH, false);
+	        	}
 	        }
 	    }
 	}
@@ -159,16 +165,25 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	protected void onResumeFragments() {
 	    super.onResumeFragments();
+	    Log.w("TEST", "Mainactivity onResumeFragments()");
 	    Session session = Session.getActiveSession();
 
 	    if (session != null && session.isOpened()) {
+	    	Log.w("TEST", "resuming dishFragment");
 	        // if the session is already open,
-	        // try to show the selection fragment
-	        showFragment(SELECTION, false);
+	        // try to show the DISHLIST fragment
+	        showFragment(DISHLIST, false);
 	    } else {
-	        // otherwise present the splash screen
-	        // and ask the person to login.
-	        showFragment(SPLASH, false);
+	    	if(loading) {
+	    	   Log.w("TEST", "resuming loadFragment");
+	    	   loading = false;
+	    	   showFragment(LOAD, false);
+	    	} else {
+	    	   Log.w("TEST", "resuming splashFragment");
+	           // otherwise present the splash screen
+	           // and ask the person to login.
+	           showFragment(SPLASH, false);
+	    	}
 	    }
 	}
 	
@@ -176,8 +191,8 @@ public class MainActivity extends FragmentActivity {
 	
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-	    // only add the menu when the selection fragment is showing
-	    if (fragments[SELECTION].isVisible()) {
+	    // only add the menu when the DISHLIST fragment is showing
+	    if (fragments[DISHLIST].isVisible()) {
 	        if (menu.size() == 0) {
 	            settings = menu.add(R.string.settings);
 	        }
@@ -197,8 +212,4 @@ public class MainActivity extends FragmentActivity {
 	    }
 	    return false;
 	}
-	
-	
-	
-
 }
