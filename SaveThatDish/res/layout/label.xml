@@ -4,66 +4,97 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-        
-    <ImageView
-        android:id="@+id/background"
-        android:layout_width="match_parent"
-        android:layout_height="190dp"
-		android:layout_margin="10dp"
-        android:background="@null"
-        android:contentDescription="@string/label"
-        android:src="@drawable/label_background" />
 
-    <AutoCompleteTextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/address"
-        android:layout_below="@+id/name"
-        android:ems="10"
-        android:text="@string/name" />
-    
-    <AutoCompleteTextView
-        android:id="@+id/address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/name"
-        android:layout_toRightOf="@+id/checkbox"
-        android:ems="10"
-        android:text="@string/address" />
-    
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_alignTop="@+id/outline"
-        android:layout_alignLeft="@+id/outline"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:background="@null"
         android:contentDescription="@string/label"
         android:src="@drawable/label_logo" />
     
     <ImageView
-        android:id="@+id/checkbox"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
+        android:id="@+id/background"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="15dp"
-        android:background="@null"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/label"
-        android:src="@drawable/label_checkbox" />
+        android:src="@drawable/label_background" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="31dp"
+        android:layout_marginTop="14dp"
+        android:layout_toRightOf="@+id/logo"
+        android:ems="10"
+        android:text="@string/name"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/name"
+        android:layout_below="@+id/name"
+        android:ems="10"
+        android:text="@string/address"
+        android:textColor="@android:color/black" />
 
     <ImageView
-        android:id="@+id/outline"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:id="@+id/info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/background"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="16dp"
-        android:background="@null"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/label"
-        android:src="@drawable/label_logo_outline" />
+        android:src="@drawable/label_info" />
+          
+    <ImageView
+        android:id="@+id/more"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/logo"
+        android:contentDescription="@string/label"
+        android:src="@drawable/label_more" />
+
+    <TextView
+        android:id="@+id/review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/background"
+        android:layout_alignRight="@+id/logo"
+        android:layout_marginRight="20dp"
+        android:text="@string/num_reviews"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/mile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/review"
+        android:layout_toLeftOf="@+id/more"
+        android:text="@string/num_miles"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/mile"
+        android:layout_alignBottom="@+id/mile"
+        android:layout_alignLeft="@+id/address"
+        android:layout_marginLeft="66dp"
+        android:text="@string/num_friends"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="20sp" />
     
 </RelativeLayout>

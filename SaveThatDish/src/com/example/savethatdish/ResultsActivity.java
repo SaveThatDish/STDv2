@@ -8,8 +8,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -48,13 +52,17 @@ public class ResultsActivity extends Activity {
 		
 		checkParseRestaurant(addresses);
 		
-		/**listView.setOnItemClickListener(new OnItemClickListener() {
+		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
-				// TODO Auto-generated method stub	
-			}		
-		});*/
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent restaurant = new Intent(ResultsActivity.this, RestaurantActivity.class);
+				startActivity(restaurant);				
+			}
+
+		});
+
 	}
 	
 	public void checkParseRestaurant(List<String> addresses) {		
