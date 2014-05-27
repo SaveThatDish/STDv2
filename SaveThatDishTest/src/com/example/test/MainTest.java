@@ -1,10 +1,10 @@
 package com.example.test;
 
-import android.content.Intent;
-import android.test.ActivityUnitTestCase;
-import android.widget.Button;
+import android.test.ActivityInstrumentationTestCase2;
 
 import com.example.savethatdish.MainActivity;
+import com.facebook.LoginActivity;
+import com.robotium.solo.Solo;
 
 //public class MainTest extends AndroidTestCase {
 //
@@ -18,37 +18,50 @@ import com.example.savethatdish.MainActivity;
 //
 //}
 
-public class MainTest extends ActivityUnitTestCase<MainActivity> {
+public class MainTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
 	public MainTest() {
 		super(MainActivity.class);
-		// TODO Auto-generated constructor stub
 	}
 	
+//	private MainActivity activity;
+//	private int buttonId;
+//	
+//@Override
 //	protected void setUp() throws Exception {
 //		super.setUp();
+//		Intent intent = new Intent(getInstrumentation().getTargetContext(),
+//		MainActivity.class);
+//		startActivity(intent, null, null);
+//		activity = getActivity();
 //	}
 //	
-//	public void test() {
-//		fail("Not yet implemented");
+//	public void testLayout() {
+//		assertNotNull(activity.findViewById(com.example.savethatdish.R.id.login_button));
+//		assertNotNull(activity.findViewById(com.example.savethatdish.R.id.splash_name));
+//
 //	}
-	private MainActivity activity;
 	
-@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		Intent intent = new Intent(getInstrumentation().getTargetContext(),
-		MainActivity.class);
-		startActivity(intent, null, null);
-		activity = getActivity();
-	}
+	 private Solo solo;
 	
-	public void testLayout() {
-//		buttonId = com.vogella.android.test.simpleactivity.R.id.button1;
-//		assertNotNull(activity.findViewById(buttonId));
-//		Button view = (Button) activity.findViewById(buttonId);
-//		assertEquals("Incorrect label of the button", "Start", view.getText());
-	}
+	 public void setUp() throws Exception {
+		 solo = new Solo(getInstrumentation(), getActivity());
+	  }
+	  
+	  public void testLogin() throws Exception {
+		  //assert(solo.waitForActivity("MainActivity"));
+//		  solo.assertCurrentActivity("wrong activity", MainActivity.class);
+//		  solo.clickOnButton(com.example.savethatdish.R.id.login_button);
+//		  solo.clickOnView(com.example.savethatdish.R.id.)(com.example.savethatdish.R.id.action_settings);
+		  solo.clickOnButton(0);
+		  Thread.sleep(5000);
+		  solo.assertCurrentActivity("", LoginActivity.class);
+	  }
+	  
+	  @Override
+	  public void tearDown() throws Exception {
+	    solo.finishOpenedActivities();
+	  }
 
 
 }
