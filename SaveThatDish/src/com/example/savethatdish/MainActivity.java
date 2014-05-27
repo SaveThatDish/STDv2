@@ -46,7 +46,7 @@ public class MainActivity extends FragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    
-	    Intent intent = new Intent(this, SearchActivity.class);
+	    Intent intent = new Intent(this, LargeMapActivity.class);
 	    startActivity(intent);
 	    
 	    uiHelper = new UiLifecycleHelper(this, callback);
