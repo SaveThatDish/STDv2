@@ -46,7 +46,7 @@ public class ResultsActivity extends Activity {
 			}
 		}
 		
-		new ResultsTask().execute();
+		checkParseRestaurant(addresses);
 		
 		/**listView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -61,9 +61,10 @@ public class ResultsActivity extends Activity {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Restaurant");
 		query.whereContainedIn("short_address", addresses);
 		query.findInBackground(new FindCallback<ParseObject>() {
+			@SuppressWarnings("unchecked")
 			public void done(List<ParseObject> restaurants, ParseException e) {
 				if (e == null) {
-					listThings(restaurants);
+					new ResultsTask().execute(restaurants);
 				} 
 				else {
 				}
@@ -77,10 +78,10 @@ public class ResultsActivity extends Activity {
 		}
 	}
 	
-	public class ResultsTask extends AsyncTask<Void, Void, Void> {
+	public class ResultsTask extends AsyncTask<List<ParseObject>, Void, Void> {
 		@Override
-		protected Void doInBackground(Void... params) {
-			checkParseRestaurant(addresses);
+		protected Void doInBackground(List<ParseObject>... params) {
+			listThings(params[0]);
 			return null;
 		}
 		
