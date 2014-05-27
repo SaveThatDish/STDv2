@@ -27,7 +27,6 @@
         android:ems="10"
         android:textColor="#FFFFFF"
         android:hint="@string/keywordHint"
-        android:textColorHint="#FFFFFF"
         android:inputType="none" />
 
     <EditText
@@ -39,10 +38,11 @@
         android:layout_alignRight="@+id/editTextSearchKeyword"
         android:layout_marginBottom="30dp"
         android:background="@null"
-        android:textColor="#FFFFFF"
         android:drawableBottom="@drawable/searchdivider"
         android:drawableLeft="@drawable/pointer"
         android:ems="10"
-        android:inputType="none" />
+        android:hint="@string/locationHint"
+        android:inputType="none"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>

@@ -27,21 +27,24 @@ public class SearchActivity extends Activity {
 	private static List<JSONObject> results = new ArrayList<JSONObject>();
 	private EditText searchText, locationText;
 	
+    public static double latitude;
+    public static double longitude;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search);
+		
+		searchText = (EditText)findViewById(R.id.editTextSearchKeyword);
+		locationText = (EditText)findViewById(R.id.editTextSearchLocation);
+		
 		ImageButton imageButton1 = (ImageButton)findViewById(R.id.searchButton);
 		imageButton1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				results.clear();
-				searchText = (EditText)findViewById(R.id.editTextSearchKeyword);
-				locationText = (EditText)findViewById(R.id.editTextSearchLocation);
 				String query = searchText.getText().toString();
-
 				String locationQuery = locationText.getText().toString();
-				
 				new SearchTask().execute(query, locationQuery);
 			}
 		});

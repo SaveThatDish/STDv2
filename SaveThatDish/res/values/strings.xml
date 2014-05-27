@@ -21,6 +21,7 @@
     
     <string name="keywordHint">What are you craving?</string>
     <string name="searchMenu">search the menu</string>
+    <string name="locationHint">Where are you?</string>
     
 
 </resources>
