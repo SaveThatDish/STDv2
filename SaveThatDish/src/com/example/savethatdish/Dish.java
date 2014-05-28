@@ -6,23 +6,83 @@ import android.util.Log;
 
 import com.parse.FindCallback;
 import com.parse.ParseObject;
+import com.parse.ParseClassName;
 import com.parse.ParseQuery;
 import com.parse.ParseException;
 
-
-public class Dish {
+@ParseClassName("Dish")
+public class Dish extends ParseObject {
 
    private String name;
-   private String restaurant;
-   private String location;
    
-   //we need to store the location data, not restaurant name. location implicitly has res. name as well
-   public Dish(String dishName, String shortAddress) { //what info is the location stored as... string? 
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return getString("name");
+	}
+	
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		put("name", name);
+	}
+	
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return getString("description");
+	}
+	
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		put("description", description);
+	}
+	
+	/**
+	 * @return the price
+	 */
+	public String getPrice() {
+		return getString("price");
+	}
+	
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(String price) {
+		put("price", price);
+	}
+	
+	/**
+	 * @return the restaurant
+	 */
+	public String getRestaurant() {
+		return getString("restaurant");
+	}
+	
+	/**
+	 * @param restaurant the restaurant to set
+	 */
+	public void setRestaurant(String restaurant) {
+		put("restaurant", restaurant);
+	}
+	
+	//default constructor
+	public Dish() {
+		name = getString("name");
+	}
+	
+
+	//Why was this constrctor even created? O.o -Sneha
+	public Dish(String dishName) { 
       
 	  //Assign variables
-	  this.name = dishName;
-      this.location = shortAddress;   
-      
+	  setName("dishName");
+	  
       //Check to see if the dish is already in the database
       ParseQuery<ParseObject> query = ParseQuery.getQuery("Dish");
       query.whereEqualTo("name", this.name);

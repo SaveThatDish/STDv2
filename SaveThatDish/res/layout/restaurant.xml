@@ -37,9 +37,9 @@
         android:layout_alignBottom="@+id/headerbg"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"  
-        android:layout_alignLeft="@+id/searchText"
+        android:layout_toLeftOf="@+id/headertext"
         android:layout_marginBottom="9dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginRight="2dp"
         android:layout_marginTop="9dp"
         android:layout_marginLeft="12dp"
         android:adjustViewBounds="true"
@@ -113,7 +113,7 @@
         android:layout_below="@+id/addButton" />
        
         <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/dishes_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
