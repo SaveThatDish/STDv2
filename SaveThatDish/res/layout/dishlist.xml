@@ -28,7 +28,7 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/desc"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/hometext" />
+        android:src="@drawable/header_hometext" />
 
     <ImageButton
         android:id="@+id/hamburgerButton"

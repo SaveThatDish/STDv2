@@ -23,5 +23,9 @@
     <string name="searchMenu">search the menu</string>
     <string name="locationHint">Where are you?</string>
     
-
+    <string name="dish_name">Dish</string>
+    <string name="dish_descr">Details about the dish</string>
+    <string name="dish_price">price</string>
+    
+    
 </resources>
