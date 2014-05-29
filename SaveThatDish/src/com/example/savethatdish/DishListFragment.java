@@ -32,21 +32,25 @@ public class DishListFragment extends Fragment implements OnClickListener {
 	    /* Set up button, listeners */
 	    ImageButton hamburger = (ImageButton) getView().findViewById(R.id.hamburgerButton);  //hamburgerButton declared in dishlist.xml
 	    ImageButton addButton = (ImageButton) getView().findViewById(R.id.addButton);
-	    ImageButton sortButton = (ImageButton) getView().findViewById(R.id.sortbutton);
-	    ImageButton mapButton = (ImageButton) getView().findViewById(R.id.mapbutton);
-	    ImageButton dishlistTextButton = (ImageButton) getView().findViewById(R.id.dishlisttext);
-	    ImageButton historyTextButton = (ImageButton) getView().findViewById(R.id.historytext);
-
-        hamburger.setOnClickListener(this); //make a listener.
-        addButton.setOnClickListener(this);
-        sortButton.setOnClickListener(this);
-        mapButton.setOnClickListener(this);
-        dishlistTextButton.setOnClickListener(this);
-        historyTextButton.setOnClickListener(this);
+	    ImageButton sortButton = (ImageButton) getView().findViewById(R.id.sortButton);
+	    ImageButton mapButton = (ImageButton) getView().findViewById(R.id.mapButton);
+	    ImageButton dishListTextButton = (ImageButton) getView().findViewById(R.id.dishListText);
+	    ImageButton historyTextButton = (ImageButton) getView().findViewById(R.id.historyText);
+	    
+	    if (hamburger != null)
+	    	hamburger.setOnClickListener(this); //make a listener.
+	    if (addButton != null)
+	    	addButton.setOnClickListener(this);
+	    if (sortButton != null)
+	    	sortButton.setOnClickListener(this);
+	    if (mapButton != null)
+	    	mapButton.setOnClickListener(this);
+	    if (dishListTextButton != null)
+	    	dishListTextButton.setOnClickListener(this);
+	    if (historyTextButton != null)
+	    	historyTextButton.setOnClickListener(this);
 
         
-        //formatting stuff
-        getView().findViewById(R.id.historytext).bringToFront(); //bring history text to front
         isCurrentlyInDishlist = true; //start off in dishList mode.
 
 	}
@@ -87,20 +91,20 @@ public class DishListFragment extends Fragment implements OnClickListener {
         // --------------------------------------------------------------------------------------
       }
       
-      else if (v.getId() == R.id.sortbutton) {
+      else if (v.getId() == R.id.sortButton) {
     	  Log.w("TEST", "Sort Button pressed");
       }
       
-      else if (v.getId() == R.id.mapbutton) {
+      else if (v.getId() == R.id.mapButton) {
     	  Log.w("TEST", "Map button pressed");
       }
       
-      else if (v.getId() == R.id.dishlisttext) {
+      else if (v.getId() == R.id.dishListText) {
     	  Log.w("TEST", "Dishlist button pressed");
     	  changeToDishlist();
       }
       
-      else if (v.getId() == R.id.historytext) {
+      else if (v.getId() == R.id.historyText) {
     	  Log.w("TEST", "History button pressed");
     	  changeToHistory();
       }
@@ -122,22 +126,25 @@ public class DishListFragment extends Fragment implements OnClickListener {
     	/* CHANGE THE UI */
     	
     	//change the header
-    	ImageView headerText = (ImageView) getView().findViewById(R.id.headertext);
-    	headerText.setImageResource(R.drawable.header_hometext);
+    	ImageView headerText = (ImageView) getView().findViewById(R.id.headerText);
+    	if (headerText != null)
+    		headerText.setImageResource(R.drawable.header_hometext);
     	
     	//change the two rounded rectangles
-    	ImageView leftRect = (ImageView) getView().findViewById(R.id.leftroundedrect);
-    	leftRect.setVisibility(View.VISIBLE);
+    	ImageView leftRect = (ImageView) getView().findViewById(R.id.leftRoundedRect);
+    	if (leftRect != null)
+    		leftRect.setVisibility(View.VISIBLE);
     	
-    	ImageView rightRect = (ImageView) getView().findViewById(R.id.rightroundedrect);
-    	rightRect.setVisibility(View.INVISIBLE);
+    	ImageView rightRect = (ImageView) getView().findViewById(R.id.rightRoundedRect);
+    	if (rightRect != null)
+    		rightRect.setVisibility(View.INVISIBLE);
     	
     	//set the button's texts (History and DishList) appropriately
-    	//ImageButton dishlistButton = (ImageButton) getView().findViewById(R.id.dishlisttext);
-    	//dishlistButton.setImageResource(R.drawable.whitedishlisttext);
+    	//ImageButton dishlistButton = (ImageButton) getView().findViewById(R.id.dishListText);
+    	//dishlistButton.setImageResource(R.drawable.whitedishListText);
     	
-    	//ImageButton historyButton = (ImageButton) getView().findViewById(R.id.historytext);
-    	//historyButton.setImageResource(R.drawable.tealhistorytext);    	
+    	//ImageButton historyButton = (ImageButton) getView().findViewById(R.id.historyText);
+    	//historyButton.setImageResource(R.drawable.tealhistoryText);    	
     	
     	
     	/* END CHANGING THE UI */
@@ -167,24 +174,18 @@ public class DishListFragment extends Fragment implements OnClickListener {
     	/* CHANGE THE UI */
     	
     	//change the header
-    	ImageView headerText = (ImageView) getView().findViewById(R.id.headertext);
-    	headerText.setImageResource(R.drawable.header_historytext);
+    	ImageView headerText = (ImageView) getView().findViewById(R.id.headerText);
+    	if (headerText != null)
+    		headerText.setImageResource(R.drawable.header_historytext);
     	
     	//change the two rounded rectangles
-    	ImageView leftRect = (ImageView) getView().findViewById(R.id.leftroundedrect);
-    	leftRect.setVisibility(View.INVISIBLE);
-    	
-    	ImageView rightRect = (ImageView) getView().findViewById(R.id.rightroundedrect);
-    	rightRect.setVisibility(View.VISIBLE);
-    	
-    	//set the button's texts (History and DishList) appropriately
-    	//ImageButton dishlistButton = (ImageButton) getView().findViewById(R.id.dishlisttext);
-    	//dishlistButton.setImageResource(R.drawable.tealdishlisttext);
-    	
-    	//ImageButton historyButton = (ImageButton) getView().findViewById(R.id.historytext);
-    	//historyButton.setImageResource(R.drawable.whitehistorytext);    	
-    	
-    	
+    	ImageView leftRect = (ImageView) getView().findViewById(R.id.leftRoundedRect);
+    	if (leftRect != null)
+    		leftRect.setVisibility(View.INVISIBLE);
+    	ImageView rightRect = (ImageView) getView().findViewById(R.id.rightRoundedRect);
+    	if (rightRect != null)
+    		rightRect.setVisibility(View.VISIBLE);
+
     	/* END CHANGING THE UI */
     	
     	
