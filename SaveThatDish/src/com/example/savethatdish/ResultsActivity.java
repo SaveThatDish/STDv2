@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -57,12 +58,29 @@ public class ResultsActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Intent restaurant = new Intent(ResultsActivity.this, RestaurantActivity.class);
-				startActivity(restaurant);				
-			}
+				ParseQuery<ParseObject> query = ParseQuery.getQuery("Restaurant");
+				String rAddress = addresses.get(arg2);
+				query.whereEqualTo("short_address", rAddress);
+				 query.getFirstInBackground(new GetCallback<ParseObject>() {
+					   public void done(ParseObject object, ParseException e) {
+					     if (e == null) {
+					    	 displayRestaurant(object.getObjectId());
+					     } else {
+					    	 e.printStackTrace();
+					     }
+					   }
+					 });
+				 }
 
 		});
 
+	}
+	
+	public void displayRestaurant(String id)
+	{
+		Intent intent = new Intent("com.example.savethatdish.RestaurantActivity");
+		intent.putExtra("restaurant_id", id);
+		startActivity(intent);
 	}
 	
 	public void checkParseRestaurant(List<String> addresses) {		
