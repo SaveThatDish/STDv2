@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
@@ -44,10 +46,21 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		    
 	    Log.w("TEST", "Mainactivity onCreate()");
+	    
+	    /*
+	     * Get rid of the title bar for all FragmentActivities associated with MainActivity
+	     */
+	    
+	    //Remove title bar
+	    this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+	    //Remove notification bar
+	    this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 		
 	    // ---------------UNCOMMENT TO TEST APP WITHOUT NEEDING TO LOGIN------------------
-		//Intent intent = new Intent(this, SearchActivity.class);
-		//startActivity(intent);
+		Intent intent = new Intent(this, LargeMapActivity.class);
+		startActivity(intent);
 		// -------------------------------------------------------------------------------	
 	    
 	    uiHelper = new UiLifecycleHelper(this, callback);

@@ -30,8 +30,8 @@ public class DishListFragment extends Fragment implements OnClickListener {
 	    super.onStart();
 	    Log.w("TEST", "DishFragment onStart()");
 	    /* Set up button, listeners */
-	    ImageButton hamburger = (ImageButton) getView().findViewById(R.id.hamburgerButton);  //hamburgerButton declared in dishlist.xml
-	    ImageButton addButton = (ImageButton) getView().findViewById(R.id.addButton);
+	    ImageButton hamburger = (ImageButton) getView().findViewById(R.id.hamburgerbutton);  //hamburgerButton declared in dishlist.xml
+	    ImageButton addButton = (ImageButton) getView().findViewById(R.id.addbutton);
 	    ImageButton sortButton = (ImageButton) getView().findViewById(R.id.sortButton);
 	    ImageButton mapButton = (ImageButton) getView().findViewById(R.id.mapButton);
 	    ImageButton dishListTextButton = (ImageButton) getView().findViewById(R.id.dishListText);
@@ -61,7 +61,7 @@ public class DishListFragment extends Fragment implements OnClickListener {
        * See: http://stackoverflow.com/questions/3320115/android-onclicklistener-identify-a-button for more
        */
     	
-      if (v.getId() == R.id.hamburgerButton) {
+      if (v.getId() == R.id.hamburgerbutton) {
     	Log.w("TEST", "Hamburger button pressed");
         System.err.println("TEST UNTIL ACTUAL HAMBURGER IMPLEMENTATION");
       /* Pseudo-Code:
@@ -74,7 +74,7 @@ public class DishListFragment extends Fragment implements OnClickListener {
        * REFERENCE: http://developer.android.com/guide/components/activities.html#Lifecycle
        */
       }
-      else if (v.getId() == R.id.addButton) {
+      else if (v.getId() == R.id.addbutton) {
     	Log.w("TEST", "Add button pressed");
        	System.err.println("TEST UNTIL ACTUAL ADD IMPLEMENTATION");
        	
