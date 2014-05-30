@@ -46,6 +46,7 @@
         <activity android:name="com.example.savethatdish.SearchActivity" android:label="@string/app_name"></activity>
         <activity android:name="com.example.savethatdish.RestaurantActivity" android:label="@string/app_name"></activity>
         <activity android:name="com.example.savethatdish.SettingsActivity" android:label="@string/app_name"></activity>
+        <activity android:name="com.example.savethatdish.HamburgerActivity" android:label="@string/app_name"></activity>
         
         
         <activity
