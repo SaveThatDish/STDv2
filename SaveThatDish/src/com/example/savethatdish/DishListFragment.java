@@ -140,11 +140,13 @@ public class DishListFragment extends Fragment implements OnClickListener {
     		rightRect.setVisibility(View.INVISIBLE);
     	
     	//set the button's texts (History and DishList) appropriately
-    	//ImageButton dishlistButton = (ImageButton) getView().findViewById(R.id.dishListText);
-    	//dishlistButton.setImageResource(R.drawable.whitedishListText);
+    	ImageButton dishlistButton = (ImageButton) getView().findViewById(R.id.dishListText);
+    	if (dishlistButton != null)
+    		dishlistButton.setBackgroundResource(R.drawable.whitedishlisttext);
     	
-    	//ImageButton historyButton = (ImageButton) getView().findViewById(R.id.historyText);
-    	//historyButton.setImageResource(R.drawable.tealhistoryText);    	
+    	ImageButton historyButton = (ImageButton) getView().findViewById(R.id.historyText);
+    	if (historyButton != null)
+    		historyButton.setBackgroundResource(R.drawable.tealhistorytext);    	
     	
     	
     	/* END CHANGING THE UI */
@@ -185,6 +187,15 @@ public class DishListFragment extends Fragment implements OnClickListener {
     	ImageView rightRect = (ImageView) getView().findViewById(R.id.rightRoundedRect);
     	if (rightRect != null)
     		rightRect.setVisibility(View.VISIBLE);
+    	
+    	//set the button's texts (History and DishList) appropriately
+    	ImageButton dishlistButton = (ImageButton) getView().findViewById(R.id.dishListText);
+    	if (dishlistButton != null)
+    		dishlistButton.setBackgroundResource(R.drawable.tealdishlisttext);
+    	
+    	ImageButton historyButton = (ImageButton) getView().findViewById(R.id.historyText);
+    	if (historyButton != null)
+    		historyButton.setBackgroundResource(R.drawable.whitehistorytext);    	
 
     	/* END CHANGING THE UI */
     	

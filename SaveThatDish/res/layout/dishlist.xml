@@ -6,15 +6,16 @@
     android:orientation="vertical"
     android:weightSum="1.0" >
 
-    <RelativeLayout
+    <ImageView
         android:id="@+id/TopHeaderBuffer"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.02"
+        android:contentDescription="@string/desc"
         android:background="@drawable/universal_background"
-        android:orientation="vertical" >
+        >
 
-    </RelativeLayout>
+    </ImageView>
     
     <RelativeLayout
         android:id="@+id/Header"
@@ -68,24 +69,26 @@
 		
     </RelativeLayout>
 
-    <RelativeLayout
+    <ImageView
         android:id="@+id/BottomHeaderBuffer"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.02"
+        android:contentDescription="@string/desc"
         android:background="@drawable/universal_background"
-        android:orientation="vertical" >
+        >
 
-    </RelativeLayout>
+    </ImageView>
 
-    <RelativeLayout
+    <ImageView
         android:id="@+id/topTabBuffer"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.02"
+        android:contentDescription="@string/desc"
         android:background="@drawable/whiterectangle" >
 
-    </RelativeLayout>
+    </ImageView>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -179,25 +182,26 @@
         
     </RelativeLayout>
 
-    <LinearLayout
+    <ImageView
         android:id="@+id/bottomTabBuffer"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="0.02"
-        android:orientation="horizontal"
+        android:contentDescription="@string/desc"
         android:background="#FFFFFF" >
 
-    </LinearLayout>
+    </ImageView>
 
-    <LinearLayout
+    <ImageView
         android:id="@+id/topSearchBuffer"
         android:layout_width="fill_parent"
         android:orientation="horizontal"
         android:layout_height="0dp"
         android:layout_weight="0.02"
+        android:contentDescription="@string/desc"
         android:background="@null" >
 
-    </LinearLayout>
+    </ImageView>
 
     <RelativeLayout
         android:id="@+id/searchLayout"
@@ -253,14 +257,13 @@
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/mapButton"
             android:layout_marginRight="4dp"
-            android:layout_marginBottom="1dp"
             android:adjustViewBounds="true"
             android:background="@null"
             android:contentDescription="@string/desc"
             android:minHeight="0dp"
             android:minWidth="0dp"
-            android:paddingBottom="6dp"
-            android:paddingTop="2dp"
+            android:paddingBottom="4dp"
+            android:paddingTop="3dp"
             android:scaleType="centerCrop"
             android:src="@drawable/sortbutton" />
         
@@ -287,7 +290,7 @@
      	<ListView
      	    android:id="@+id/listView1"
      	    android:layout_width="match_parent"
-     	    android:layout_height="60dp"
+     	    android:layout_height="fill_parent"
      	    android:layout_alignParentLeft="true"
      	    android:layout_below="@+id/searchdivider" >
      	</ListView>
