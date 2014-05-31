@@ -27,5 +27,13 @@
     <string name="dish_descr">Details about the dish</string>
     <string name="dish_price">price</string>
     
+    <string name="profile_name">Winnie</string>
+    <string name="dishes_added">5 Restaurants Added</string>
+    <string name="dishes_forked">5 Dishes Forked</string>
+    <string name="dishes_rated_title">DISHES RATED</string>
+    <string name="dishes_followers_title">FOLLOWERS</string>
+    <string name="dishes_following_title">FOLLOWING</string>
+    
+    
     
 </resources>
