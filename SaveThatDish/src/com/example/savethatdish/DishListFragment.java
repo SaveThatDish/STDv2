@@ -1,8 +1,5 @@
 package com.example.savethatdish;
 
-import com.facebook.Session;
-import com.parse.ParseUser;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,9 +8,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+
+import com.facebook.Session;
+import com.parse.ParseUser;
 
 public class DishListFragment extends Fragment implements OnClickListener {
 		
+	private boolean isCurrentlyInDishlist; //flag that indicates whether this is currently in dishlist (false if history)
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
@@ -26,10 +29,29 @@ public class DishListFragment extends Fragment implements OnClickListener {
 	public void onStart() {
 	    super.onStart();
 	    Log.w("TEST", "DishFragment onStart()");
-	    ImageButton hamburger = (ImageButton) getView().findViewById(R.id.hamburgerButton);  //hamburgerButton declared in dishlist.xml
-	    ImageButton addButton = (ImageButton) getView().findViewById(R.id.addButton);
-        hamburger.setOnClickListener(this); //make a listener.
-        addButton.setOnClickListener(this);
+	    /* Set up button, listeners */
+	    ImageButton hamburger = (ImageButton) getView().findViewById(R.id.hamburgerbutton);  //hamburgerButton declared in dishlist.xml
+	    ImageButton addButton = (ImageButton) getView().findViewById(R.id.addbutton);
+	    ImageButton sortButton = (ImageButton) getView().findViewById(R.id.sortButton);
+	    ImageButton mapButton = (ImageButton) getView().findViewById(R.id.mapButton);
+	    ImageButton dishListTextButton = (ImageButton) getView().findViewById(R.id.dishListText);
+	    ImageButton historyTextButton = (ImageButton) getView().findViewById(R.id.historyText);
+	    
+	    if (hamburger != null)
+	    	hamburger.setOnClickListener(this); //make a listener.
+	    if (addButton != null)
+	    	addButton.setOnClickListener(this);
+	    if (sortButton != null)
+	    	sortButton.setOnClickListener(this);
+	    if (mapButton != null)
+	    	mapButton.setOnClickListener(this);
+	    if (dishListTextButton != null)
+	    	dishListTextButton.setOnClickListener(this);
+	    if (historyTextButton != null)
+	    	historyTextButton.setOnClickListener(this);
+
+        
+        isCurrentlyInDishlist = true; //start off in dishList mode.
 
 	}
 	
@@ -39,7 +61,7 @@ public class DishListFragment extends Fragment implements OnClickListener {
        * See: http://stackoverflow.com/questions/3320115/android-onclicklistener-identify-a-button for more
        */
     	
-      if (v.getId() == R.id.hamburgerButton) {
+      if (v.getId() == R.id.hamburgerbutton) {
     	Log.w("TEST", "Hamburger button pressed");
         System.err.println("TEST UNTIL ACTUAL HAMBURGER IMPLEMENTATION");
       /* Pseudo-Code:
@@ -52,7 +74,7 @@ public class DishListFragment extends Fragment implements OnClickListener {
        * REFERENCE: http://developer.android.com/guide/components/activities.html#Lifecycle
        */
       }
-      else if (v.getId() == R.id.addButton) {
+      else if (v.getId() == R.id.addbutton) {
     	Log.w("TEST", "Add button pressed");
        	System.err.println("TEST UNTIL ACTUAL ADD IMPLEMENTATION");
        	
@@ -68,11 +90,125 @@ public class DishListFragment extends Fragment implements OnClickListener {
         ((MainActivity)getActivity()).showFragment(MainActivity.SPLASH, false);
         // --------------------------------------------------------------------------------------
       }
-       
       
+      else if (v.getId() == R.id.sortButton) {
+    	  Log.w("TEST", "Sort Button pressed");
+      }
+      
+      else if (v.getId() == R.id.mapButton) {
+    	  Log.w("TEST", "Map button pressed");
+      }
+      
+      else if (v.getId() == R.id.dishListText) {
+    	  Log.w("TEST", "Dishlist button pressed");
+    	  changeToDishlist();
+      }
+      
+      else if (v.getId() == R.id.historyText) {
+    	  Log.w("TEST", "History button pressed");
+    	  changeToHistory();
+      }
+    
       
     }
 	
+    /*
+     * Change the stuff on the screen to go from History to Dishlist
+     * Parameters: None
+     * Return: Boolean that indicates whether it successfully is in Dishlist now
+     * Side Effects: Changes the screen UI to reflect the new mode it is in; shows the dishlist entries
+     */
+    
+    private boolean changeToDishlist() {
+    	if (isCurrentlyInDishlist)
+    		return true; //already in dishlist, don't have to change anything so don't requery
+    	
+    	/* CHANGE THE UI */
+    	
+    	//change the header
+    	ImageView headerText = (ImageView) getView().findViewById(R.id.headerText);
+    	if (headerText != null)
+    		headerText.setImageResource(R.drawable.header_hometext);
+    	
+    	//change the two rounded rectangles
+    	ImageView leftRect = (ImageView) getView().findViewById(R.id.leftRoundedRect);
+    	if (leftRect != null)
+    		leftRect.setVisibility(View.VISIBLE);
+    	
+    	ImageView rightRect = (ImageView) getView().findViewById(R.id.rightRoundedRect);
+    	if (rightRect != null)
+    		rightRect.setVisibility(View.INVISIBLE);
+    	
+    	//set the button's texts (History and DishList) appropriately
+    	ImageButton dishlistButton = (ImageButton) getView().findViewById(R.id.dishListText);
+    	if (dishlistButton != null)
+    		dishlistButton.setBackgroundResource(R.drawable.whitedishlisttext);
+    	
+    	ImageButton historyButton = (ImageButton) getView().findViewById(R.id.historyText);
+    	if (historyButton != null)
+    		historyButton.setBackgroundResource(R.drawable.tealhistorytext);    	
+    	
+    	
+    	/* END CHANGING THE UI */
+    	
+    	
+    	/* CHANGE THE LIST OF RESTAURANTS */
+    	
+    	/* END CHANGING THE LIST OF RESTAURANTS */
+    	
+    	
+    	isCurrentlyInDishlist = true;
+    	return true;
+    	
+    }
+    
+    /*
+     * Change the stuff on the screen to go from Dishlist to History 
+     * Parameters: None
+     * Return: Boolean that indicates whether it is successfully in History
+     * Side Effects: Changes the screen UI to reflect the new mode it is in; shows the History entries
+     */
+    
+    private boolean changeToHistory() {
+    	if (!isCurrentlyInDishlist)
+    		return true; //already in history, don't have to change anything.
+    	
+    	/* CHANGE THE UI */
+    	
+    	//change the header
+    	ImageView headerText = (ImageView) getView().findViewById(R.id.headerText);
+    	if (headerText != null)
+    		headerText.setImageResource(R.drawable.header_historytext);
+    	
+    	//change the two rounded rectangles
+    	ImageView leftRect = (ImageView) getView().findViewById(R.id.leftRoundedRect);
+    	if (leftRect != null)
+    		leftRect.setVisibility(View.INVISIBLE);
+    	ImageView rightRect = (ImageView) getView().findViewById(R.id.rightRoundedRect);
+    	if (rightRect != null)
+    		rightRect.setVisibility(View.VISIBLE);
+    	
+    	//set the button's texts (History and DishList) appropriately
+    	ImageButton dishlistButton = (ImageButton) getView().findViewById(R.id.dishListText);
+    	if (dishlistButton != null)
+    		dishlistButton.setBackgroundResource(R.drawable.tealdishlisttext);
+    	
+    	ImageButton historyButton = (ImageButton) getView().findViewById(R.id.historyText);
+    	if (historyButton != null)
+    		historyButton.setBackgroundResource(R.drawable.whitehistorytext);    	
+
+    	/* END CHANGING THE UI */
+    	
+    	
+    	/* CHANGE THE LIST OF RESTAURANTS */
+    	
+    	/* END CHANGING THE LIST OF RESTAURANTS */
+    	
+    	
+    	isCurrentlyInDishlist = false;
+    	return true;
+    }
+    
     
     /* 
      * Android LifeCycle
