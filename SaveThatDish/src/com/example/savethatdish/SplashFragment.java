@@ -1,14 +1,19 @@
 package com.example.savethatdish;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import com.facebook.Request;
 import com.facebook.Session;
 import com.facebook.Response;
 import com.facebook.model.GraphUser;
+import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.ParseException;
 
@@ -85,15 +90,19 @@ public class SplashFragment extends Fragment {
 					public void onCompleted(List<GraphUser> friends, Response response) {
 						if (friends != null && friends.size() > 0) {
 							Log.w("TEST", "Setting user friends");
-							String[] friendIds = new String[friends.size()];
+							List<String> friendIds = new ArrayList<String>(friends.size());
+							//String[] friendNames = new String[friends.size()];
 							GraphUser next;
 							for (int i=0; i<friends.size(); i++) {
 								next = friends.get(i);
-								friendIds[i] = next.getId();
+								friendIds.add(i,next.getId());
+								//friendNames[i] = next.getName();
 							}
-							ParseUser pUser = ParseUser.getCurrentUser();
-						    pUser.addAllUnique("friends", Arrays.asList(friendIds));
-							pUser.saveInBackground();
+							getFriendObjectIds(friendIds);
+							//ParseUser pUser = ParseUser.getCurrentUser();
+						    //pUser.addAllUnique("friends", Arrays.asList(friendObjectIds));
+						    //pUser.addAllUnique("friendnames", Arrays.asList(friendNames));
+							//pUser.saveInBackground();
 						} else if (friends != null && friends.size() == 0) {
 							Log.w("TEST", "No friends are using app");
 						} else if (response.getError() != null) {
@@ -103,6 +112,40 @@ public class SplashFragment extends Fragment {
 					}
 				});
 		request.executeAsync();
+	}
+	
+	private void getFriendObjectIds(List<String> friendFbIds) {
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("_User");
+		query.whereContainedIn("fbId", friendFbIds);
+	    query.findInBackground(new FindCallback<ParseObject>() {
+	    	@Override
+	    	public void done(List<ParseObject> objects, ParseException e) {
+	    		if(e == null) {
+	    			if(objects.size() == 0) {
+	    				Log.w("TEST", "No friends found...");
+	    			} else {
+	    			   Log.d("TEST", "Setting friends' objectids");
+	    			   Log.d("TEST", "objects size is: " + objects.size());
+	    			   String[] friendObjectIds = new String[objects.size()];
+	    			   String[] friendNames = new String[objects.size()];
+	    			   ParseObject next;
+	    			   for(int i=0; i<objects.size(); i++) {
+	    			      next = objects.get(i);
+	    				  Log.d("TEST", "next is: " + next);
+	    				  friendObjectIds[i] = next.getObjectId();
+	    				  friendNames[i] = (String) next.get("username");
+	    				  Log.d("TEST", "name is: " + friendNames[i]);
+	    			   }
+	    			   ParseUser pUser = ParseUser.getCurrentUser();
+	    			   pUser.addAllUnique("friends", Arrays.asList(friendObjectIds));
+	    			   pUser.addAllUnique("friendnames", Arrays.asList(friendNames));
+	    			   pUser.saveInBackground();
+	    			}
+	    		} else {
+	    			Log.d("TEST", "getFriendObjectIds Error: " + e.getMessage());
+	    		}
+	    	}
+	    });
 	}
 	
 	private void onLoginButtonClicked() {
