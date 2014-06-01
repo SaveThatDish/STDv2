@@ -59,7 +59,7 @@ public class MainActivity extends FragmentActivity {
 
 		
 	    // ---------------UNCOMMENT TO TEST APP WITHOUT NEEDING TO LOGIN------------------
-		Intent intent = new Intent(this, LargeMapActivity.class);
+		Intent intent = new Intent(this, SettingsActivity.class);//Large Map Activity
 		startActivity(intent);
 		// -------------------------------------------------------------------------------	
 	    
