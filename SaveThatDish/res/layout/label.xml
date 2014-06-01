@@ -1,39 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#D8D4D4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#D8D4D4"
     android:orientation="vertical" >
 
     <ImageView
+        android:id="@+id/label_background"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/desc"
+        android:scaleType="fitXY"
+        android:src="@drawable/label_white_background" />
+
+    <ImageView
         android:id="@+id/label_logo"
+        android:layout_width="67dp"
+        android:layout_height="70dp"
+        android:layout_alignLeft="@+id/label_background"
+        android:layout_alignTop="@+id/label_background"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="5dp"
+        android:background="@null"
+        android:contentDescription="@string/desc"
+        android:src="@null" />
+
+    <ImageView
+        android:id="@+id/label_logo_outline"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:background="@null"
-        android:contentDescription="@string/label"
-        android:src="@drawable/label_logo" />
-    
-    <ImageView
-        android:id="@+id/label_background"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/label"
-        android:src="@drawable/label_background" />
+        android:layout_alignLeft="@+id/label_logo"
+        android:layout_alignTop="@+id/label_logo"
+        android:layout_marginLeft="-2dp"
+        android:contentDescription="@string/desc"
+        android:src="@drawable/label_logo_outline" />
 
     <TextView
         android:id="@+id/label_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="31dp"
-        android:layout_marginTop="14dp"
-        android:layout_toRightOf="@+id/label_logo"
-        android:ems="10"
-        android:text="@string/name"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:layout_alignTop="@+id/label_logo_outline"
+        android:layout_toRightOf="@+id/label_logo_outline"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#4f4f4f" />
 
     <TextView
         android:id="@+id/label_address"
@@ -41,71 +54,18 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/label_name"
         android:layout_below="@+id/label_name"
-        android:ems="10"
-        android:text="@string/address"
-        android:textColor="@android:color/black" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#4f4f4f" />
 
-    <ImageView
-        android:id="@+id/label_info"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/label_background"
-        android:layout_alignParentLeft="true"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/label"
-        android:src="@drawable/label_info" />
-          
     <ImageView
         android:id="@+id/label_more"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/label_logo"
-        android:contentDescription="@string/label"
+        android:layout_below="@+id/label_logo_outline"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="-9dp"
+        android:contentDescription="@string/desc"
         android:src="@drawable/label_more" />
 
-    <TextView
-        android:id="@+id/label_reviews"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/label_background"
-        android:layout_alignRight="@+id/label_logo"
-        android:layout_marginRight="20dp"
-        android:text="@string/num_reviews"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="12sp" />
-    
-    <TextView
-        android:id="@+id/label_mile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/label_reviews"
-        android:layout_toLeftOf="@+id/label_more"
-        android:text="@string/num_miles"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/label_friend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/label_mile"
-        android:layout_alignBottom="@+id/label_mile"
-        android:layout_alignLeft="@+id/label_address"
-        android:layout_marginLeft="66dp"
-        android:text="@string/num_friends"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/label_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/label_friend"
-        android:layout_alignBottom="@+id/label_friend"
-        android:layout_alignLeft="@+id/label_reviews"
-        android:text="@string/rating"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="20sp" />
-    
 </RelativeLayout>

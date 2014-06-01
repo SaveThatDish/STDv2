@@ -12,33 +12,38 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 public class ResultsActivity extends Activity {
 	 
-	ListView listView;
-	List<JSONObject> results;
-	List<String> addresses;
-	List<String> names;
+	private ListView listView;
+	private ImageButton listButton, mapButton;
+	private List<JSONObject> results;
+	private List<String> addresses;
+	private RestaurantAdapter restaurantAdapter;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.results);
 		
 		listView = (ListView)findViewById(R.id.searchResults);
 		results = SearchActivity.returnResults();
 		addresses = new ArrayList<String>();
-		names = new ArrayList<String>();
+		listButton = (ImageButton)findViewById(R.id.listButton);
+		mapButton = (ImageButton)findViewById(R.id.mapButton);
+		
+		restaurantAdapter = new RestaurantAdapter(ResultsActivity.this, R.layout.label);
 
 		for(JSONObject j : results) {
 			try {
@@ -50,37 +55,32 @@ public class ResultsActivity extends Activity {
 				e.printStackTrace();
 			}
 		}
-		
-		checkParseRestaurant(addresses);
-		
-		listView.setOnItemClickListener(new OnItemClickListener() {
 
+		checkParseRestaurant(addresses);
+
+		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				ParseQuery<ParseObject> query = ParseQuery.getQuery("Restaurant");
-				String rAddress = addresses.get(arg2);
-				query.whereEqualTo("short_address", rAddress);
-				 query.getFirstInBackground(new GetCallback<ParseObject>() {
-					   public void done(ParseObject object, ParseException e) {
-					     if (e == null) {
-					    	 displayRestaurant(object.getObjectId());
-					     } else {
-					    	 e.printStackTrace();
-					     }
-					   }
-					 });
-				 }
-
+				Intent restaurant = new Intent(ResultsActivity.this, RestaurantActivity.class);
+				startActivity(restaurant);				
+			}
 		});
-
-	}
-	
-	public void displayRestaurant(String id)
-	{
-		Intent intent = new Intent("com.example.savethatdish.RestaurantActivity");
-		intent.putExtra("restaurant_id", id);
-		startActivity(intent);
+		
+		listButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				//do nothing
+			}
+		});
+		
+		mapButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent map = new Intent(ResultsActivity.this, LargeMapActivity.class);
+				startActivity(map);
+			}
+		});
 	}
 	
 	public void checkParseRestaurant(List<String> addresses) {		
@@ -100,7 +100,7 @@ public class ResultsActivity extends Activity {
 	
 	public void listThings(List<ParseObject> restaurants) {
 		for(ParseObject o : restaurants) {
-			names.add((String) o.get("name"));
+			restaurantAdapter.add(new Restaurant(o));
 		}
 	}
 	
@@ -112,9 +112,7 @@ public class ResultsActivity extends Activity {
 		}
 		
 		protected void onPostExecute(Void result) {
-			ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-				ResultsActivity.this, android.R.layout.simple_list_item_1, names);
-			listView.setAdapter(arrayAdapter);
+			listView.setAdapter(restaurantAdapter);
 		}
 	}
 }
