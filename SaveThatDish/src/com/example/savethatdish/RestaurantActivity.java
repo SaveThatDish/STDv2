@@ -60,12 +60,12 @@ public class RestaurantActivity extends Activity{
 		text.setText(restaurant.getString("name"));
 		
 		//Set restaurant rating
-		text = (TextView) findViewById(R.id.label_rating);
-		text.setText(restaurant.getString("rating"));
+		//text = (TextView) findViewById(R.id.label_rating);
+		//text.setText(restaurant.getString("rating"));
 
 		//Set number of reviews
-		text = (TextView) findViewById(R.id.label_reviews);
-		text.setText(restaurant.getString("review_count"));
+		//text = (TextView) findViewById(R.id.label_reviews);
+		//text.setText(restaurant.getString("review_count"));
 
 		//Set restaurant address
 		text = (TextView) findViewById(R.id.label_address);
