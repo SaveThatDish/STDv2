@@ -7,13 +7,16 @@ import java.net.URL;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
+import android.view.MotionEvent;
+import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,9 +29,12 @@ import com.parse.ParseQuery;
 public class RestaurantActivity extends Activity{
 	
 	private DishAdapter dishAdapter;
+	private Restaurant restaurant;
+	private SquareImageView imageView;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.restaurant);
 		
 		// Create an adapter to bind the items with the view
@@ -46,10 +52,10 @@ public class RestaurantActivity extends Activity{
 		  public void done(ParseObject object, ParseException e) {
 		    if (e == null) {
 		    	setInfo(object);
-				setNumFriends(object);
-				setDistance(object);
+				//setNumFriends(object);
+				//setDistance(object);
 				listDishes(object);
-		        new ImageTask().execute(object);
+		        new ImageTask().execute(restaurant);
 		    } else {
 		    	Log.w("TEST", "Failed :(");
 		    	e.printStackTrace();
@@ -60,39 +66,26 @@ public class RestaurantActivity extends Activity{
 	}
 	
 	private void setInfo(ParseObject restaurant) {
-		//Set restaurant name
-		TextView text = (TextView) findViewById(R.id.label_name);
-		text.setText(restaurant.getString("name"));
+		TextView nameView, addressView, reviewsView, ratingView;
 		
-		//Set restaurant rating
-		//text = (TextView) findViewById(R.id.label_rating);
-		//text.setText(restaurant.getString("rating"));
+		this.restaurant = new Restaurant(restaurant);
+		imageView = (SquareImageView) findViewById(R.id.label_logo);
+        imageView.setImageDrawable(null);
+        nameView = (TextView) findViewById(R.id.label_name);
+        addressView = (TextView) findViewById(R.id.label_address);
+        reviewsView = (TextView) findViewById(R.id.reviews_value);
+        //milesView = (TextView) findViewById(R.id.distance_value);
+        //friendView = (TextView) findViewById(R.id.friends_value);
+        ratingView = (TextView) findViewById(R.id.rating_value);
+        
+        nameView.setText(this.restaurant.getName());
+        addressView.setText(this.restaurant.getAddress());
+        reviewsView.setText("in " + this.restaurant.getNumReviews() + " reviews");
+        ratingView.setText(this.restaurant.getRating() + "/5");
 
-		//Set number of reviews
-		//text = (TextView) findViewById(R.id.label_reviews);
-		//text.setText(restaurant.getString("review_count"));
-
-		//Set restaurant address
-		text = (TextView) findViewById(R.id.label_address);
-		text.setText(restaurant.getString("short_address"));
-		/*
-		//Set restaurant_logo or image
-        InputStream is;
-		try {
-			is = (InputStream) new URL(restaurant.getString("yelp_image_url")).getContent();
-	        Drawable d = Drawable.createFromStream(is, "src name");
-	        ImageView image = (ImageView) findViewById(R.id.label_logo);
-	        image.setImageDrawable(d);        
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 	}
 
-	private void setDistance(ParseObject object) {
+	/**private void setDistance(ParseObject object) {
 		// TODO calculate distance from current location to the restaurant
 		// set TestView on R.id.label_mile
 	}
@@ -100,32 +93,33 @@ public class RestaurantActivity extends Activity{
 	private void setNumFriends(ParseObject object) {
 		// TODO calculate number of friends who also want to visit this restaurant
 		// set TextView on R.id.label_friend
-	}
+	}*/
 	
 	/*Need to put this code whenever you click on a restaurant:
 	Intent intent = new Intent("com.example.savethatdish.RestaurantActivity");
 	intent.putExtra("restaurant_id", restaurant.getObjectId()); <-- restaurant is the parse object that was clicked
 	startActivity(intent);
 */
-	public class ImageTask extends AsyncTask<ParseObject, Void, Bitmap> {
+	public class ImageTask extends AsyncTask<Restaurant, Void, Bitmap> {
 		@Override
-		protected Bitmap doInBackground(ParseObject... arg0) {
+		protected Bitmap doInBackground(Restaurant... arg0) {
 			Bitmap mIcon = null;
 			InputStream newurl;
 			try {
-				newurl = (InputStream) new URL((String) arg0[0].get("yelp_image_url")).openStream();
+				newurl = (InputStream) new URL(arg0[0].getImageURL()).openStream();
 				mIcon = BitmapFactory.decodeStream(newurl);
 			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return mIcon;
 		}
 		
 		protected void onPostExecute(Bitmap result) {
-	        ImageView image = (ImageView) findViewById(R.id.label_logo);
-			image.setImageBitmap(result);
+			imageView.setImageBitmap(result);
 		}
 	}
 	
@@ -148,5 +142,13 @@ public class RestaurantActivity extends Activity{
 		        }
 		    }
 		});
+	}
+	
+	@Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.
+                INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
 	}
 }

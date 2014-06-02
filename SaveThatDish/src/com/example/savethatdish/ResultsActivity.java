@@ -104,13 +104,11 @@ public class ResultsActivity extends Activity {
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
+					long arg3) {	
 				Intent restaurant = new Intent(ResultsActivity.this, RestaurantActivity.class);
-				startActivity(restaurant);		
-				Intent restaurant_info = new Intent(ResultsActivity.this, RestaurantActivity.class);
  				Restaurant currRestaurant = (Restaurant) arg0.getItemAtPosition(arg2);
- 				restaurant_info.putExtra("restaurant_id", currRestaurant.getObjectId());
- 				startActivity(restaurant_info);
+ 				restaurant.putExtra("restaurant_id", currRestaurant.getObjectId());
+ 				startActivity(restaurant);
 			}
 		});
 		

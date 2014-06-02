@@ -130,7 +130,6 @@
 					            android:layout_height="wrap_content"
 					            android:layout_alignParentTop="true"
 					            android:layout_centerHorizontal="true"
-					            android:text="4.5/5"
 					            android:textSize="6pt"
 					            android:textColor="#898989" />
 
