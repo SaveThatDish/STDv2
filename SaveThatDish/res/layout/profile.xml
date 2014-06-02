@@ -78,7 +78,7 @@
 			            android:layout_centerHorizontal="true"
 			            android:layout_centerVertical="true"
 			            android:contentDescription="@string/desc"
-			            android:src="@drawable/header_hometext" />
+			            android:src="@drawable/profiletext" />
 			
 			        <ImageButton
 			            android:id="@+id/addbutton"
