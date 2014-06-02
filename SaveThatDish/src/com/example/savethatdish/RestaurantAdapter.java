@@ -23,7 +23,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
 	private Context mContext;
 	private int mLayoutResourceId;
 	private ImageView imageView;
-	private TextView nameView, addressView, reviewsView, ratingView;
+	private TextView nameView, addressView; //, reviewsView, ratingView;
 
 	public RestaurantAdapter(Context context, int layoutResourceId) {
 		super(context, layoutResourceId);
@@ -71,10 +71,8 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>
 				newurl = (InputStream) new URL(arg0[0].getImageURL()).openStream();
 				mIcon = BitmapFactory.decodeStream(newurl);
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return mIcon;

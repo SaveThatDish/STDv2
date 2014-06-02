@@ -49,8 +49,11 @@ public class SettingsActivity extends Activity{
            y2 = touchevent.getY(); 
 
            if (x1 < x2)//L to R swipe 
-           	startActivity(new Intent(SettingsActivity.this, HamburgerActivity.class));     
-       	    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+           {
+        	  Intent intent = new Intent(SettingsActivity.this, HamburgerActivity.class);
+           	  startActivity(intent);     
+       	      overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+           }
          }
        }
        return false;

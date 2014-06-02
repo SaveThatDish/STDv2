@@ -2,6 +2,7 @@ package com.example.savethatdish;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class DishAdapter extends ArrayAdapter<Dish>
 		}
 
 		row.setTag(currentItem);
-		
+		Log.w("TEST", currentItem.getName());
 		//Update text fields to reflect dish's name, description, and price
 		final TextView name = (TextView) row.findViewById(R.id.dish_name);
 		name.setText(currentItem.getName());

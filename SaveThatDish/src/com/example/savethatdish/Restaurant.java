@@ -11,6 +11,7 @@ public class Restaurant {
 	private String rating;
 	private String numReviews;
 	//private String numFriends;
+	private String objectId;
 	
 	public Restaurant(ParseObject o) {
 		setImageURL((String) o.get("yelp_image_url"));
@@ -18,6 +19,21 @@ public class Restaurant {
 		setAddress((String) o.get("full_address"));
 		setRating(String.valueOf(o.get("rating")));
 		setNumReviews(String.valueOf(o.get("review_count")));
+		setObjectId((String) o.getObjectId());
+	}
+
+	/**
+	 * @return the objectId
+	 */
+	public String getObjectId() {
+		return objectId;
+	}
+
+	/**
+	 * @param objectId the objectId to set
+	 */
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
 	}
 
 	public String getRating() {

@@ -8,8 +8,11 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,6 +31,11 @@ public class RestaurantActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.restaurant);
 		
+		// Create an adapter to bind the items with the view
+		dishAdapter = new DishAdapter(this, R.layout.menu_item);
+		ListView dishlist = (ListView) findViewById(R.id.dishes_list);
+		dishlist.setAdapter(dishAdapter);		
+
 		//Find the ID of the restaurant to display
 		Intent intent = getIntent();
 		String restaurantId = intent.getStringExtra("restaurant_id");
@@ -38,20 +46,17 @@ public class RestaurantActivity extends Activity{
 		  public void done(ParseObject object, ParseException e) {
 		    if (e == null) {
 		    	setInfo(object);
+				setNumFriends(object);
+				setDistance(object);
+				listDishes(object);
+		        new ImageTask().execute(object);
 		    } else {
-		      // TODO some error message
+		    	Log.w("TEST", "Failed :(");
+		    	e.printStackTrace();
 		    }
 		  }
 		});
-		
-		// Create an adapter to bind the items with the view
-		dishAdapter = new DishAdapter(this, R.layout.menu_item);
-		ListView dishlist = (ListView) findViewById(R.id.dishes_list);
-		dishlist.setAdapter(dishAdapter);		
-		
-		setNumFriends(restaurantId);
-		setDistance(restaurantId);
-		listDishes(restaurantId);
+				
 	}
 	
 	private void setInfo(ParseObject restaurant) {
@@ -70,7 +75,7 @@ public class RestaurantActivity extends Activity{
 		//Set restaurant address
 		text = (TextView) findViewById(R.id.label_address);
 		text.setText(restaurant.getString("short_address"));
-		
+		/*
 		//Set restaurant_logo or image
         InputStream is;
 		try {
@@ -84,15 +89,15 @@ public class RestaurantActivity extends Activity{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 
-	private void setDistance(String restaurantId) {
+	private void setDistance(ParseObject object) {
 		// TODO calculate distance from current location to the restaurant
 		// set TestView on R.id.label_mile
 	}
 	
-	private void setNumFriends(String restaurantId) {
+	private void setNumFriends(ParseObject object) {
 		// TODO calculate number of friends who also want to visit this restaurant
 		// set TextView on R.id.label_friend
 	}
@@ -102,11 +107,33 @@ public class RestaurantActivity extends Activity{
 	intent.putExtra("restaurant_id", restaurant.getObjectId()); <-- restaurant is the parse object that was clicked
 	startActivity(intent);
 */
-	private void listDishes(String ID) {
+	public class ImageTask extends AsyncTask<ParseObject, Void, Bitmap> {
+		@Override
+		protected Bitmap doInBackground(ParseObject... arg0) {
+			Bitmap mIcon = null;
+			InputStream newurl;
+			try {
+				newurl = (InputStream) new URL((String) arg0[0].get("yelp_image_url")).openStream();
+				mIcon = BitmapFactory.decodeStream(newurl);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return mIcon;
+		}
+		
+		protected void onPostExecute(Bitmap result) {
+	        ImageView image = (ImageView) findViewById(R.id.label_logo);
+			image.setImageBitmap(result);
+		}
+	}
+	
+	private void listDishes(ParseObject object) {
 		
 		//Query all dishes in the database and choose the ones belonging to the right restaurant
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Dish");
-		query.whereEqualTo("restaurant", ID);
+		query.whereEqualTo("restaurant", object);
 
 		query.findInBackground(new FindCallback<ParseObject>() {
 		    public void done(List<ParseObject> dishList, ParseException e) {
@@ -114,10 +141,10 @@ public class RestaurantActivity extends Activity{
 		        	//Add the results to the adapter to be displayed
 		        	for(ParseObject a : dishList)
 		        	{
-		        		dishAdapter.add((Dish)a);
+		        		dishAdapter.add(new Dish(a));
 		        	}
 		        } else {
-		        	// TODO Throw some sort of error?
+		        	e.printStackTrace();
 		        }
 		    }
 		});

@@ -1,128 +1,99 @@
 package com.example.savethatdish;
 
-import java.util.List;
-
-import android.util.Log;
-
-import com.parse.FindCallback;
 import com.parse.ParseObject;
-import com.parse.ParseClassName;
-import com.parse.ParseQuery;
-import com.parse.ParseException;
 
-@ParseClassName("Dish")
-public class Dish extends ParseObject {
+public class Dish {
 
    private String name;
+   private String objectId;
+   private String description;
+   private String restaurantId;
+   private String price;
+   //listed
+   //liked
+   //disliked
+   
+   public Dish(ParseObject o)
+   {
+	   setName((String) o.get("name"));
+	   setObjectId((String) o.getObjectId());
+	   setDescription((String) o.get("description"));
+	   setPrice((String) o.get("price"));
+	   setRestaurantId((String) o.get("restaurantId"));
+   }
    
 	/**
 	 * @return the name
 	 */
 	public String getName() {
-		return getString("name");
+		return name;
 	}
 	
 	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
-		put("name", name);
+		this.name = name;
+	}
+	
+	/**
+	 * @return the objectId
+	 */
+	public String getObjectId() {
+		return objectId;
+	}
+	
+	/**
+	 * @param objectId the objectId to set
+	 */
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
 	}
 	
 	/**
 	 * @return the description
 	 */
 	public String getDescription() {
-		return getString("description");
+		return description;
 	}
 	
 	/**
 	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
-		put("description", description);
+		this.description = description;
+	}
+	
+	/**
+	 * @return the restaurantId
+	 */
+	public String getRestaurantId() {
+		return restaurantId;
+	}
+	
+	/**
+	 * @param restaurantId the restaurantId to set
+	 */
+	public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
 	}
 	
 	/**
 	 * @return the price
 	 */
 	public String getPrice() {
-		return getString("price");
+		return price;
 	}
 	
 	/**
 	 * @param price the price to set
 	 */
 	public void setPrice(String price) {
-		put("price", price);
+		this.price = price;
 	}
 	
-	/**
-	 * @return the restaurant
-	 */
-	public String getRestaurant() {
-		return getString("restaurant");
-	}
-	
-	/**
-	 * @param restaurant the restaurant to set
-	 */
-	public void setRestaurant(String restaurant) {
-		put("restaurant", restaurant);
-	}
-	
-	//default constructor
-	public Dish() {
-		name = getString("name");
-	}
-	
-
-	//Why was this constrctor even created? O.o -Sneha
-	public Dish(String dishName) { 
-      
-	  //Assign variables
-	  setName("dishName");
-	  
-      //Check to see if the dish is already in the database
-      ParseQuery<ParseObject> query = ParseQuery.getQuery("Dish");
-      query.whereEqualTo("name", this.name);
-      
-      //query.whereEqualTo("short_address", shortAddress);
-      query.findInBackground(new FindCallback<ParseObject>() {
-          public void done(List<ParseObject> list, ParseException e) {
-              if (e == null) 
-              {
-            	  Log.d("testing", "List is of size  " + list.size());
-              } 
-              else 
-              {
-                  Log.d("testing", "Error: " + e.getMessage());
-              }
-          }
-      });
-      
-      //if dish doesn't exist in parse
-        //addToParse(); //check return type/error handling. what do we do if it fails?
-      //else
-        //pull info from parse
-      
-      //this.restaurant = restaurantName; QUERY RESTAURANT NAME
-
-      
-      //should we create a ParseQuery object? We'll need it for allLikes and onBucketList only, 
-      //so maybe only create the object in the methods that actually need it?
-      
-         }
-
-   /*
-    * Creating the dish in the constructor doesn't make sense: what if the dish exists already and we're 
-    * only interested in creating a local var for the sake of convenience. Instead create a method that does that.
-    * 
-    * @Return: boolean to check for success? 
-    * OtheR: Error handling should be done within this method.  
-    */
-   
-   private boolean addToParse() {
+	//---------------------------USER INTERACTION METHODS---------------------------------
+   public boolean addToParse() {
 	   ParseObject dish = new ParseObject("Dish"); 
 	   dish.add("name", name);
 	   
@@ -134,7 +105,7 @@ public class Dish extends ParseObject {
 	   //Associated info to add: restaurant name, location. Anything else?
 	   return true; //need to do error handling before returning
    }
-   
+
    /*
     * Purpose: delete local copy, connect to parse?
     * @Return: Boolean value indicating whether remove was successful
