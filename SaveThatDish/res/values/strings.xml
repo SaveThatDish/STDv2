@@ -34,6 +34,8 @@
     <string name="dishes_followers_title">FOLLOWERS</string>
     <string name="dishes_following_title">FOLLOWING</string>
     
-    
+    <string name="profile_DishList">DishList</string>
+    <string name="profile_History">History</string>
+    <string name="profile_Settings">Settings</string>
     
 </resources>

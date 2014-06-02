@@ -1,163 +1,313 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/disabled_button_color" >
-    
-    
-    <ImageView
-        android:id="@+id/backgroundpic"
-        android:contentDescription="@string/desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:adjustViewBounds="true"
-        android:background="@drawable/coverphoto"
-        android:cropToPadding="true"
-        android:scaleType="center"
-        android:src="@drawable/coverphoto_overlay" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:background="#D8D4D4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1.0" >
 
-    <ImageView
-        android:id="@+id/headerbg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:adjustViewBounds="true"
-        android:background="@null"
-        android:alpha="0.50"
-        android:contentDescription="@string/desc"
-        android:src="@drawable/topperfull" />
+	<RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:background="@color/disabled_button_color" >
+	    
+	    
+	    <ImageView
+	        android:id="@+id/backgroundpic"
+	        android:contentDescription="@string/desc"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentTop="true"
+	        android:adjustViewBounds="true"
+	        android:background="@drawable/coverphoto"
+	        android:cropToPadding="true"
+	        android:scaleType="center"
+	        android:src="@drawable/coverphoto_overlay" />
+	
+	    <ImageView
+	        android:id="@+id/headerbg"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentTop="true"
+	        android:adjustViewBounds="true"
+	        android:background="@null"
+	        android:alpha="0.50"
+	        android:contentDescription="@string/desc"
+	        android:src="@drawable/topperfull" />
+	
+	    <ImageView
+	        android:id="@+id/headertext"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/hamburgerButton"
+	        android:layout_marginLeft="40dp"
+	        android:layout_marginTop ="10dp"
+	        android:adjustViewBounds="true"
+	        android:contentDescription="@string/desc"
+	        android:layout_centerHorizontal="true"
+	        android:src="@drawable/profiletext" />
+	
+	    <ImageButton
+	        android:id="@+id/hamburgerButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/headerbg"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginBottom="9dp"
+	        android:layout_marginLeft="12dp"
+	        android:layout_marginTop="9dp"
+	        android:layout_toLeftOf="@+id/headertext"
+	        android:adjustViewBounds="true"
+	        android:background="@drawable/hamburger"
+	        android:contentDescription="@string/desc"
+	        android:minHeight="0dp"
+	        android:minWidth="0dp" />
+	
+	    <ImageButton
+	        android:id="@+id/addButton"
+	        android:layout_width="24dp"
+	        android:layout_height="24dp"
+	        android:layout_alignBottom="@+id/headerbg"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginBottom="7dp"
+	        android:layout_marginRight="12dp"
+	        android:layout_marginTop="7dp"
+	        android:adjustViewBounds="true"
+	        android:background="@drawable/add"
+	        android:contentDescription="@string/desc"
+	        android:minHeight="0dp"
+	        android:minWidth="0dp" />
+	
+	    <ImageView
+	        android:id="@+id/profilepic"
+	        android:layout_width="100dp"
+	        android:layout_height="100dp"
+	        android:layout_alignLeft="@+id/hamburgerButton"
+	        android:layout_alignRight="@+id/addButton"
+	        android:layout_below="@+id/headerbg"
+	        android:layout_marginTop="24dp"
+	        android:layout_marginRight="20dp"
+	        android:contentDescription="@string/desc"
+	        android:src="@drawable/profile_defaultpic" />
+	
+	    <ImageView
+	        android:id="@+id/profilepicborder"
+	        android:layout_width="103dp"
+	        android:layout_height="103dp"
+	        android:layout_alignTop="@+id/profilepic"
+	        android:layout_centerHorizontal="true"
+	        android:contentDescription="@string/desc"
+	        android:src="@drawable/profile_picborder" />
+	
+	    <TextView
+	        android:id="@+id/textView1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/profilepicborder"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="15dp"
+	        android:textColor="#fff"
+	        android:text="@string/profile_name" />
+	
+	    <TextView
+	        android:id="@+id/textView2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/headertext"
+	        android:layout_below="@+id/textView1"
+	        android:textColor="#fff"
+	        android:text="@string/dishes_added" />
+	
+	    <TextView
+	        android:id="@+id/textView3"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/textView2"
+	        android:layout_centerHorizontal="true"
+	        android:textColor="#fff"
+	        android:text="@string/dishes_forked" />
+	
+	    <ImageButton
+	        android:id="@+id/editButton"
+	        android:layout_width="150dp"
+	        android:layout_height="30dp"
+	        android:layout_below="@+id/textView3"
+	        android:layout_centerHorizontal="true"
+	        android:contentDescription="@string/desc"
+	        android:scaleType="fitCenter"
+	        android:background="@android:color/transparent" 
+	        android:src="@drawable/profile_edit" />
+	
+	    <TextView
+	        android:id="@+id/textView4"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginTop ="305dp"
+	        android:textSize="12sp"
+	        android:text="@string/dishes_rated_title" />
+	
+	    <TextView
+	        android:id="@+id/textView5"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView4"
+	        android:layout_alignBottom="@+id/textView4"
+	        android:layout_centerHorizontal="true"
+	        android:text="@string/dishes_followers_title"
+	        android:textSize="12sp" />
+	
+	    <TextView
+	        android:id="@+id/textView6"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignRight="@+id/addButton"
+	        android:layout_marginRight="8dp"
+	        android:layout_alignTop="@+id/textView5"
+	        android:textSize="12sp"
+	        android:text="@string/dishes_following_title" />
 
-    <ImageView
-        android:id="@+id/headertext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/hamburgerButton"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop ="10dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/desc"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/profiletext" />
+	    <ImageButton
+	        android:id="@+id/mydishlistbutton"
+	        android:contentDescription="@string/desc"
+	        android:layout_width="wrap_content"
+	        android:layout_height="40dp"
+	        android:layout_alignTop="@+id/textView6"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="36dp"
+	        android:src="@drawable/greyrect" />
 
-    <ImageButton
-        android:id="@+id/hamburgerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/headerbg"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="9dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="9dp"
-        android:layout_toLeftOf="@+id/headertext"
-        android:adjustViewBounds="true"
-        android:background="@drawable/hamburger"
-        android:contentDescription="@string/desc"
-        android:minHeight="0dp"
-        android:minWidth="0dp" />
+	    
 
-    <ImageButton
-        android:id="@+id/addButton"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_alignBottom="@+id/headerbg"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="7dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="7dp"
-        android:adjustViewBounds="true"
-        android:background="@drawable/add"
-        android:contentDescription="@string/desc"
-        android:minHeight="0dp"
-        android:minWidth="0dp" />
+	    <ImageView
+	        android:id="@+id/divider1"
+	        android:contentDescription="@string/desc"
+	        android:layout_width="wrap_content"
+	        android:layout_height="0.5dp"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/mydishlistbutton"
+	        android:src="@drawable/profile_divider" />
 
-    <ImageView
-        android:id="@+id/profilepic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignLeft="@+id/hamburgerButton"
-        android:layout_alignRight="@+id/addButton"
-        android:layout_below="@+id/headerbg"
-        android:layout_marginTop="24dp"
-        android:layout_marginRight="20dp"
-        android:contentDescription="@string/desc"
-        android:src="@drawable/profile_defaultpic" />
+	    <ImageButton
+	        android:id="@+id/myhistorybutton"
+	        android:contentDescription="@string/desc"
+	        android:layout_width="wrap_content"
+	        android:layout_height="40dp"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/divider1"
+	        android:src="@drawable/greyrect" />
+	    
+	    <ImageView
+	        android:id="@+id/divider2"
+	        android:contentDescription="@string/desc"
+	        android:layout_width="wrap_content"
+	        android:layout_height="0.5dp"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/myhistorybutton"
+	        android:src="@drawable/profile_divider" />
+	    
+	    <ImageButton
+	        android:id="@+id/settingsButton"
+	        android:contentDescription="@string/desc"
+	        android:layout_width="wrap_content"
+	        android:layout_height="40dp"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/divider2"
+	        android:src="@drawable/greyrect" />
 
-    <ImageView
-        android:id="@+id/profilepicborder"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
-        android:layout_alignTop="@+id/profilepic"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/desc"
-        android:src="@drawable/profile_picborder" />
+	    <ImageView
+	        android:id="@+id/editIcon"
+	        android:contentDescription="@string/desc"
+	        android:layout_width="20dp"
+	        android:layout_height="20dp"
+	        android:layout_alignLeft="@+id/textView4"
+	        android:layout_below="@+id/backgroundpic"
+	        android:layout_marginTop="5dp"
+	        android:src="@drawable/write_icon" />
+	    
+	    <ImageView
+	        android:id="@+id/historyIcon"
+	        android:contentDescription="@string/desc"
+	        android:layout_width="20dp"
+	        android:layout_height="20dp"
+	        android:layout_alignLeft="@+id/textView4"
+	        android:layout_below="@+id/editIcon"
+	        android:layout_marginTop="22dp"
+	        android:src="@drawable/copy_icon" />
+	    
+	    <ImageView
+	        android:id="@+id/settingsIcon"
+	        android:contentDescription="@string/desc"
+	        android:layout_width="20dp"
+	        android:layout_height="20dp"
+	        android:layout_alignLeft="@+id/textView4"
+	        android:layout_below="@+id/historyIcon"
+	        android:layout_marginTop="20dp"
+	        android:src="@drawable/settings_icon" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/profilepicborder"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:text="@string/profile_name" />
+	    <TextView
+	        android:id="@+id/profileDishList"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_above="@+id/historyIcon"
+	        android:layout_toLeftOf="@+id/textView5"
+	        android:text="@string/profile_DishList"
+	        android:textColor="#000"
+	        android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/headertext"
-        android:layout_below="@+id/textView1"
-        android:text="@string/dishes_added" />
+	    <ImageView
+	        android:id="@+id/arrow1"
+	        android:contentDescription="@string/desc"
+	        android:layout_width="20dp"
+	        android:layout_height="20dp"
+	        
+	        android:layout_above="@+id/historyIcon"
+	        android:layout_alignRight="@+id/addButton"
+	        android:src="@drawable/profile_arrow" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:text="@string/dishes_forked" />
+	    <TextView
+	        android:id="@+id/profileHistory"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/profileDishList"
+	        android:layout_alignTop="@+id/historyIcon"
+	        android:contentDescription="@string/desc"
+	        android:text="@string/profile_History"
+	        android:textColor="#000"
+	        android:textSize="16sp" />
 
-    <ImageButton
-        android:id="@+id/editButton"
-        android:layout_width="150dp"
-        android:layout_height="70dp"
-        android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/desc"
-        android:scaleType="fitCenter"
-        android:src="@drawable/profile_editbutton" />
+	    <TextView
+	        android:id="@+id/profileSettings"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/settingsIcon"
+	        android:layout_alignLeft="@+id/profileHistory"
+	        android:contentDescription="@string/desc"
+	        android:text="@string/profile_Settings"
+	        android:textColor="#000"
+	        android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop ="315dp"
-        android:textSize="12sp"
-        android:text="@string/dishes_rated_title" />
+	    <ImageView
+	        android:id="@+id/imageView1"
+	        android:layout_width="20dp"
+	        android:layout_height="20dp"
+	        android:layout_above="@+id/settingsIcon"
+	        android:layout_alignLeft="@+id/arrow1"
+	        android:contentDescription="@string/desc"
+	        android:src="@drawable/profile_arrow" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView4"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_centerHorizontal="true"
-        android:text="@string/dishes_followers_title"
-        android:textSize="12sp" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/addButton"
-        android:layout_marginRight="8dp"
-        android:layout_alignTop="@+id/textView5"
-        android:textSize="12sp"
-        android:text="@string/dishes_following_title" />
-    
-</RelativeLayout>
+	    <ImageView
+	        android:id="@+id/arrow2"
+	        android:layout_width="20dp"
+	        android:layout_height="20dp"
+	        android:layout_alignLeft="@+id/imageView1"
+	        android:layout_alignTop="@+id/profileSettings"
+	        android:contentDescription="@string/desc"
+	        android:src="@drawable/profile_arrow" />
+	    
+	</RelativeLayout>
+</LinearLayout>
