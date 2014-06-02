@@ -4,12 +4,20 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 
 public class HamburgerActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        
+		
+		
 		setContentView(R.layout.hamburger);
 		
 		
@@ -18,7 +26,8 @@ public class HamburgerActivity extends Activity{
         dishlist.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-        	startActivity(new Intent(HamburgerActivity.this, MainActivity.class));
+        	startActivity(new Intent(HamburgerActivity.this, DishListFragment.class));
+        	overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
         }
         });
         
@@ -28,6 +37,7 @@ public class HamburgerActivity extends Activity{
         @Override
         public void onClick(View v) {
         	startActivity(new Intent(HamburgerActivity.this, MainActivity.class));
+        	overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
         }
         });
 		
@@ -38,6 +48,7 @@ public class HamburgerActivity extends Activity{
         @Override
         public void onClick(View v) {
         	startActivity(new Intent(HamburgerActivity.this, MainActivity.class));//CHANGE THIS TO PROFILE
+        	overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
         }
         });
         
@@ -48,6 +59,7 @@ public class HamburgerActivity extends Activity{
         @Override
         public void onClick(View v) {
         	startActivity(new Intent(HamburgerActivity.this, MainActivity.class));//CHANGE THIS TO FRIENDS
+        	overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
         }
         });
         
@@ -58,6 +70,7 @@ public class HamburgerActivity extends Activity{
         @Override
         public void onClick(View v) {
         	startActivity(new Intent(HamburgerActivity.this, SettingsActivity.class));
+        	overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
         }
         });
         
@@ -68,10 +81,20 @@ public class HamburgerActivity extends Activity{
         @Override
         public void onClick(View v) {
         	startActivity(new Intent(HamburgerActivity.this, MainActivity.class));//CHANGE THIS TO LOGOUT
+        	overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
         }
         });
         
         
-        //BACK ARROW SHENANIGANS	
-	}	
+		/* Back Arrow */
+        ImageView back = (ImageView) findViewById(R.id.backButton);
+        back.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+        	finish();
+        	//this.stopSelf();
+        	//overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+        }
+        });	
+    }	
 }

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 
 public class SettingsActivity extends Activity{
@@ -13,6 +15,10 @@ public class SettingsActivity extends Activity{
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
 		setContentView(R.layout.settings);
 		
 		/* CODE FOR A HAMBURGER CLICK */
@@ -21,6 +27,7 @@ public class SettingsActivity extends Activity{
         @Override
         public void onClick(View v) {
         	startActivity(new Intent(SettingsActivity.this, HamburgerActivity.class));
+        	overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
         }
         });
 	}
@@ -42,7 +49,8 @@ public class SettingsActivity extends Activity{
            y2 = touchevent.getY(); 
 
            if (x1 < x2)//L to R swipe 
-           	startActivity(new Intent(SettingsActivity.this, HamburgerActivity.class));                            
+           	startActivity(new Intent(SettingsActivity.this, HamburgerActivity.class));     
+       	    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
          }
        }
        return false;
