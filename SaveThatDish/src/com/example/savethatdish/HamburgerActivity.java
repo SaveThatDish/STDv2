@@ -3,6 +3,8 @@ package com.example.savethatdish;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -10,6 +12,9 @@ import android.widget.ImageView;
 
 
 public class HamburgerActivity extends Activity{
+    float x1,x2;
+    float y1, y2;
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
@@ -92,9 +97,33 @@ public class HamburgerActivity extends Activity{
         @Override
         public void onClick(View v) {
         	finish();
-        	//this.stopSelf();
-        	//overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-        }
+        	}
         });	
-    }	
+        
+	}
+        
+   	 /* SWIPE YOUR FINGER RIGHT TO LEFT AND HAMBURGER MENU WILL CLOSE */
+   	 public boolean onTouchEvent(MotionEvent touchevent) 
+        {
+          switch (touchevent.getAction())
+          {
+            case MotionEvent.ACTION_DOWN: 
+            {
+              x1 = touchevent.getX();
+              y1 = touchevent.getY();
+              break;
+            }
+            case MotionEvent.ACTION_UP: 
+            {
+              x2 = touchevent.getX();
+              y2 = touchevent.getY(); 
+
+              if (x1 > x2)//R to L swipe 
+              {
+            	 finish();
+              }
+            }
+          }
+          return false;
+        }
 }
