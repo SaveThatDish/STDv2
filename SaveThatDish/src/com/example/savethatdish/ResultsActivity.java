@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -30,6 +31,9 @@ public class ResultsActivity extends Activity {
 	private List<JSONObject> results;
 	private List<String> addresses;
 	private RestaurantAdapter restaurantAdapter;
+	
+    float x1,x2;
+    float y1, y2;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -98,7 +102,61 @@ public class ResultsActivity extends Activity {
 				}
             }
 		});
+		
+		
+		/* CODE FOR A HAMBURGER CLICK */
+        ImageButton hb = (ImageButton) findViewById(R.id.hamburger);
+        hb.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+        	startActivity(new Intent(ResultsActivity.this, HamburgerActivity.class));
+        	overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+        }
+        });
+        
+		/* CODE FOR A PLUS SIGN CLICK */
+        ImageButton plus = (ImageButton) findViewById(R.id.add_button);
+        plus.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+        	startActivity(new Intent(ResultsActivity.this, SearchActivity.class));
+        	overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+        }
+        });   
+
 	}
+	
+	 /* SWIPE YOUR FINGER LEFT TO RIGHT AND HAMBURGER MENU WILL OPEN 
+	  * SWIPE YOUR FINGER RIGHT TO LEFT AND SEARCH WILL OPEN
+	  */
+	 public boolean onTouchEvent(MotionEvent touchevent) 
+    {
+      switch (touchevent.getAction())
+      {
+        case MotionEvent.ACTION_DOWN: 
+        {
+          x1 = touchevent.getX(); y1 = touchevent.getY();
+          break;
+        }
+        case MotionEvent.ACTION_UP: 
+        {
+          x2 = touchevent.getX(); y2 = touchevent.getY(); 
+          if (x1 < x2)//L to R swipe 
+          {
+       	      Intent intent = new Intent(ResultsActivity.this, HamburgerActivity.class);
+          	  startActivity(intent);     
+      	      overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+          }
+          else if(x1 > x2)
+          {
+       	      Intent intent = new Intent(ResultsActivity.this, SearchActivity.class);
+          	  startActivity(intent);     
+      	      overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+          }
+        }
+      }
+    return false;
+   }
 	
 	public void listThings(List<ParseObject> restaurants) {
 		for(ParseObject o : restaurants) {

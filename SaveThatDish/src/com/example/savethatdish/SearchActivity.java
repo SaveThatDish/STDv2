@@ -30,6 +30,9 @@ public class SearchActivity extends Activity {
 	
     public static double latitude;
     public static double longitude;
+    
+    float x1,x2;
+    float y1, y2;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -54,15 +57,47 @@ public class SearchActivity extends Activity {
 					new SearchTask().execute(query, locationQuery);
 			}
 		});
+		
+		/* CODE FOR A HAMBURGER CLICK */
+        ImageButton hb = (ImageButton) findViewById(R.id.hamburger);
+        hb.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+        	startActivity(new Intent(SearchActivity.this, HamburgerActivity.class));
+        	overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+        }
+        });
 	}
+
 	
 	@Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouchEvent(MotionEvent touchevent) {
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.
                 INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        
+   	    /* SWIPE YOUR FINGER LEFT TO RIGHT AND HAMBURGER MENU WILL OPEN */
+        switch (touchevent.getAction())
+        {
+          case MotionEvent.ACTION_DOWN: 
+          {
+            x1 = touchevent.getX(); y1 = touchevent.getY();
+            break;
+          }
+          case MotionEvent.ACTION_UP: 
+          {
+            x2 = touchevent.getX(); y2 = touchevent.getY(); 
+            if (x1 < x2)//L to R swipe 
+            {
+         	  Intent intent = new Intent(SearchActivity.this, HamburgerActivity.class);
+            	  startActivity(intent);     
+        	      overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+            }
+          }
+        }
         return true;
     }
+
 	
 	public static List<JSONObject> returnResults() {
 		return results;

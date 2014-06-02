@@ -30,6 +30,16 @@ public class SettingsActivity extends Activity{
         	overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
         }
         });
+        
+		/* CODE FOR A PLUS SIGN CLICK */
+        ImageButton plus = (ImageButton) findViewById(R.id.addButton);
+        plus.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+        	startActivity(new Intent(SettingsActivity.this, SearchActivity.class));
+        	overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+        }
+        }); 
 	}
 	
 	 /* SWIPE YOUR FINGER LEFT TO RIGHT AND HAMBURGER MENU WILL OPEN */
@@ -39,23 +49,26 @@ public class SettingsActivity extends Activity{
        {
          case MotionEvent.ACTION_DOWN: 
          {
-           x1 = touchevent.getX();
-           y1 = touchevent.getY();
+           x1 = touchevent.getX(); y1 = touchevent.getY();
            break;
          }
          case MotionEvent.ACTION_UP: 
          {
-           x2 = touchevent.getX();
-           y2 = touchevent.getY(); 
-
+           x2 = touchevent.getX(); y2 = touchevent.getY(); 
            if (x1 < x2)//L to R swipe 
            {
         	  Intent intent = new Intent(SettingsActivity.this, HamburgerActivity.class);
            	  startActivity(intent);     
        	      overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
            }
+           else if(x1 > x2)
+           {
+        	  Intent intent = new Intent(SettingsActivity.this, SearchActivity.class);
+              startActivity(intent);     
+          	  overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);	   
+           }
          }
        }
-       return false;
-     }
+     return false;
+    }
 }
