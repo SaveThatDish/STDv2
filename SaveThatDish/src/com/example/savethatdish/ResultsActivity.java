@@ -62,8 +62,10 @@ public class ResultsActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Intent restaurant = new Intent(ResultsActivity.this, RestaurantActivity.class);
-				startActivity(restaurant);				
+				Intent restaurant_info = new Intent(ResultsActivity.this, RestaurantActivity.class);
+				Restaurant restaurant = (Restaurant) arg0.getItemAtPosition(arg2);
+				restaurant_info.putExtra("restaurant_id", restaurant.getObjectId());
+				startActivity(restaurant_info);				
 			}
 		});
 		
