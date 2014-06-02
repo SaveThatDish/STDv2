@@ -9,14 +9,18 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.parse.FindCallback;
@@ -27,13 +31,12 @@ import com.parse.ParseQuery;
 public class ResultsActivity extends Activity {
 	 
 	private ListView listView;
-	private ImageButton listButton, mapButton;
+	private ImageView listButton, mapButton;
 	private List<JSONObject> results;
 	private List<String> addresses;
 	private RestaurantAdapter restaurantAdapter;
 	
-    float x1,x2;
-    float y1, y2;
+	float x1, x2, y1, y2;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,11 +44,47 @@ public class ResultsActivity extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.results);
 		
+		ImageButton hamburgerButton = (ImageButton)findViewById(R.id.hamburger);
+		hamburgerButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent hamburger = new Intent(ResultsActivity.this, HamburgerActivity.class);
+				startActivity(hamburger);
+				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+			}
+		});
+		
+		ImageButton addButton = (ImageButton)findViewById(R.id.add_button);
+		addButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent hamburger = new Intent(ResultsActivity.this, SearchActivity.class);
+				startActivity(hamburger);
+			}
+		});
+		
 		listView = (ListView)findViewById(R.id.searchResults);
 		results = SearchActivity.returnResults();
 		addresses = new ArrayList<String>();
-		listButton = (ImageButton)findViewById(R.id.listButton);
-		mapButton = (ImageButton)findViewById(R.id.mapButton);
+		listButton = (ImageView)findViewById(R.id.left_list_tab_filled);
+		mapButton = (ImageView)findViewById(R.id.right_map_tab_empty);
+		mapButton.setDrawingCacheEnabled(true);
+		mapButton.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View arg0, MotionEvent arg1) {
+				Bitmap bmp = Bitmap.createBitmap(arg0.getDrawingCache());
+				int color = bmp.getPixel((int)arg1.getX(), (int)arg1.getY());
+				if(color == Color.TRANSPARENT)
+					return false;
+				else {
+					Intent map = new Intent(ResultsActivity.this, LargeMapActivity.class);
+					startActivity(map);
+					return true;
+				}
+			}
+		});
 		
 		restaurantAdapter = new RestaurantAdapter(ResultsActivity.this, R.layout.label);
 
@@ -66,10 +105,12 @@ public class ResultsActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
+				Intent restaurant = new Intent(ResultsActivity.this, RestaurantActivity.class);
+				startActivity(restaurant);		
 				Intent restaurant_info = new Intent(ResultsActivity.this, RestaurantActivity.class);
-				Restaurant restaurant = (Restaurant) arg0.getItemAtPosition(arg2);
-				restaurant_info.putExtra("restaurant_id", restaurant.getObjectId());
-				startActivity(restaurant_info);				
+ 				Restaurant currRestaurant = (Restaurant) arg0.getItemAtPosition(arg2);
+ 				restaurant_info.putExtra("restaurant_id", currRestaurant.getObjectId());
+ 				startActivity(restaurant_info);
 			}
 		});
 		
@@ -102,61 +143,39 @@ public class ResultsActivity extends Activity {
 				}
             }
 		});
-		
-		
-		/* CODE FOR A HAMBURGER CLICK */
-        ImageButton hb = (ImageButton) findViewById(R.id.hamburger);
-        hb.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-        	startActivity(new Intent(ResultsActivity.this, HamburgerActivity.class));
-        	overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
-        }
-        });
-        
-		/* CODE FOR A PLUS SIGN CLICK */
-        ImageButton plus = (ImageButton) findViewById(R.id.add_button);
-        plus.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-        	startActivity(new Intent(ResultsActivity.this, SearchActivity.class));
-        	overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-        }
-        });   
-
 	}
 	
 	 /* SWIPE YOUR FINGER LEFT TO RIGHT AND HAMBURGER MENU WILL OPEN 
-	  * SWIPE YOUR FINGER RIGHT TO LEFT AND SEARCH WILL OPEN
-	  */
-	 public boolean onTouchEvent(MotionEvent touchevent) 
-    {
-      switch (touchevent.getAction())
-      {
-        case MotionEvent.ACTION_DOWN: 
-        {
-          x1 = touchevent.getX(); y1 = touchevent.getY();
-          break;
-        }
-        case MotionEvent.ACTION_UP: 
-        {
-          x2 = touchevent.getX(); y2 = touchevent.getY(); 
-          if (x1 < x2)//L to R swipe 
-          {
-       	      Intent intent = new Intent(ResultsActivity.this, HamburgerActivity.class);
-          	  startActivity(intent);     
-      	      overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
-          }
-          else if(x1 > x2)
-          {
-       	      Intent intent = new Intent(ResultsActivity.this, SearchActivity.class);
-          	  startActivity(intent);     
-      	      overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-          }
-        }
-      }
-    return false;
-   }
+ 	  * SWIPE YOUR FINGER RIGHT TO LEFT AND SEARCH WILL OPEN
+ 	  */
+ 	 public boolean onTouchEvent(MotionEvent touchevent) 
+     {
+       switch (touchevent.getAction())
+       {
+         case MotionEvent.ACTION_DOWN: 
+         {
+           x1 = touchevent.getX(); y1 = touchevent.getY();
+           break;
+         }
+         case MotionEvent.ACTION_UP: 
+         {
+           x2 = touchevent.getX(); y2 = touchevent.getY(); 
+           if (x1 < x2)//L to R swipe 
+           {
+        	      Intent intent = new Intent(ResultsActivity.this, HamburgerActivity.class);
+           	  startActivity(intent);     
+       	      overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+           }
+           else if(x1 > x2)
+           {
+        	      Intent intent = new Intent(ResultsActivity.this, SearchActivity.class);
+           	  startActivity(intent);     
+       	      overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+           }
+         }
+       }
+     return false;
+    }
 	
 	public void listThings(List<ParseObject> restaurants) {
 		for(ParseObject o : restaurants) {

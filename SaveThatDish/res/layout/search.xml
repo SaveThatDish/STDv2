@@ -45,22 +45,6 @@
             android:layout_centerVertical="true"
             android:contentDescription="@string/desc"
             android:src="@drawable/searchtext" />
-
-        <ImageButton
-            android:id="@+id/add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="8dp"
-            android:adjustViewBounds="true"
-            android:background="@null"
-            android:contentDescription="@string/desc"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            android:padding="0dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/add" />
     </RelativeLayout>
 
     <ImageView

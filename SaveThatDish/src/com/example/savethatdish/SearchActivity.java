@@ -30,9 +30,8 @@ public class SearchActivity extends Activity {
 	
     public static double latitude;
     public static double longitude;
-    
-    float x1,x2;
-    float y1, y2;
+	
+	float x1,x2,y1,y2;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -40,11 +39,23 @@ public class SearchActivity extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.search);
 		
+		ImageButton hamburgerButton = (ImageButton)findViewById(R.id.hamburger);
+		hamburgerButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent hamburger = new Intent(SearchActivity.this, HamburgerActivity.class);
+				startActivity(hamburger);
+				overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+
+			}
+		});
+		
 		searchText = (EditText)findViewById(R.id.editTextSearchKeyword);
 		locationText = (EditText)findViewById(R.id.editTextSearchLocation);
 		
-		ImageButton imageButton1 = (ImageButton)findViewById(R.id.searchButton);
-		imageButton1.setOnClickListener(new View.OnClickListener() {
+		ImageButton searchButton = (ImageButton)findViewById(R.id.searchButton);
+		searchButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				results.clear();
@@ -57,36 +68,24 @@ public class SearchActivity extends Activity {
 					new SearchTask().execute(query, locationQuery);
 			}
 		});
-		
-		/* CODE FOR A HAMBURGER CLICK */
-        ImageButton hb = (ImageButton) findViewById(R.id.hamburger);
-        hb.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-        	startActivity(new Intent(SearchActivity.this, HamburgerActivity.class));
-        	overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
-        }
-        });
 	}
-
 	
 	@Override
-    public boolean onTouchEvent(MotionEvent touchevent) {
+    public boolean onTouchEvent(MotionEvent event) {
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.
                 INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-        
-   	    /* SWIPE YOUR FINGER LEFT TO RIGHT AND HAMBURGER MENU WILL OPEN */
-        switch (touchevent.getAction())
+           /* SWIPE YOUR FINGER LEFT TO RIGHT AND HAMBURGER MENU WILL OPEN */
+        switch (event.getAction())
         {
           case MotionEvent.ACTION_DOWN: 
           {
-            x1 = touchevent.getX(); y1 = touchevent.getY();
+            x1 = event.getX(); y1 = event.getY();
             break;
           }
           case MotionEvent.ACTION_UP: 
           {
-            x2 = touchevent.getX(); y2 = touchevent.getY(); 
+            x2 = event.getX(); y2 = event.getY(); 
             if (x1 < x2)//L to R swipe 
             {
          	  Intent intent = new Intent(SearchActivity.this, HamburgerActivity.class);
@@ -95,9 +94,8 @@ public class SearchActivity extends Activity {
             }
           }
         }
-        return true;
+		return true;
     }
-
 	
 	public static List<JSONObject> returnResults() {
 		return results;
