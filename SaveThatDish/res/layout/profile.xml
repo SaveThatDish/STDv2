@@ -319,7 +319,7 @@
         >
 	    <ImageButton
 	        android:contentDescription="@string/desc"
-	        android:id="@+id/historyButton"
+	        android:id="@+id/historyButton2"
 	        android:layout_width="fill_parent"
 	        android:layout_height="fill_parent"
 	        android:src="#D8D4D4" 
@@ -335,7 +335,7 @@
 	        >
 			<ImageView
 			    android:contentDescription="@string/desc"
-			    android:id="@+id/2BlankSpaceAboveButton"
+			    android:id="@+id/Blank2SpaceAboveButton"
 			    android:layout_width="match_parent"
 			    android:layout_height="0dp"
 			    android:src="@null"
@@ -350,7 +350,7 @@
 	    	    >
 				<ImageView 
 				    android:contentDescription="@string/desc"
-				    android:id="@+id/1BlankSpace"
+				    android:id="@+id/Blank1Space"
 				    android:layout_width="0dp"
 				    android:layout_height="match_parent"
 				    android:src="@null"
@@ -358,7 +358,7 @@
 				    />
 			    <ImageView
 			        android:contentDescription="@string/desc"
-			        android:id="@+id/1imageView1"
+			        android:id="@+id/image1View1"
 			        android:layout_width="0dp"
 			        android:layout_height="wrap_content"
 			        android:layout_weight="0.08"
@@ -366,7 +366,7 @@
 			        android:src="@drawable/copy_icon" />
 			    <ImageView 
 				    android:contentDescription="@string/desc"
-				    android:id="@+id/1BlankSpace2"
+				    android:id="@+id/BlankSpace21"
 				    android:layout_width="0dp"
 				    android:layout_height="match_parent"
 				    android:src="@null"
@@ -385,7 +385,7 @@
 			    
 			    <ImageView 
 				    android:contentDescription="@string/desc"
-				    android:id="@+id/BlankSpace3"
+				    android:id="@+id/Blank2Space3"
 				    android:layout_width="0dp"
 				    android:layout_height="match_parent"
 				    android:src="@null"
@@ -400,14 +400,14 @@
 			        android:layout_weight="0.1"
 			        android:src="@drawable/profile_arrow" />
 			    </LinearLayout>
-			<ImageView
-			    android:contentDescription="@string/desc"
-			    android:id="@+id/1BlankSpaceBelowButton"
-			    android:layout_width="match_parent"
-			    android:layout_height="0dp"
-			    android:src="@null"
-			    android:layout_weight="0.2"
-			/>
+
+	    	<ImageView
+	    	    android:id="@+id/BlankSpace3BelowButton"
+	    	    android:layout_width="match_parent"
+	    	    android:layout_height="0dp"
+	    	    android:layout_weight="0.2"
+	    	    android:contentDescription="@string/desc"
+	    	    android:src="@null" />
 			    
 		    </LinearLayout>
 
@@ -462,7 +462,7 @@
 	    	    >
 				<ImageView 
 				    android:contentDescription="@string/desc"
-				    android:id="@+id/2BlankSpace"
+				    android:id="@+id/Blank2Space"
 				    android:layout_width="0dp"
 				    android:layout_height="match_parent"
 				    android:src="@null"
@@ -478,7 +478,7 @@
 			        android:src="@drawable/settings_icon" />
 			    <ImageView 
 				    android:contentDescription="@string/desc"
-				    android:id="@+id/2BlankSpace2"
+				    android:id="@+id/Blank2Space2"
 				    android:layout_width="0dp"
 				    android:layout_height="match_parent"
 				    android:src="@null"
@@ -515,7 +515,7 @@
 			    
 			<ImageView
 			    android:contentDescription="@string/desc"
-			    android:id="@+id/2BlankSpaceBelowButton"
+			    android:id="@+id/BlankSpaceBelow2Button"
 			    android:layout_width="match_parent"
 			    android:layout_height="0dp"
 			    android:src="@null"
