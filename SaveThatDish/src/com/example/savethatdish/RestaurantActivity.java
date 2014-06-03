@@ -39,7 +39,7 @@ public class RestaurantActivity extends Activity{
 		
 		// Create an adapter to bind the items with the view
 		dishAdapter = new DishAdapter(this, R.layout.menu_item);
-		ListView dishlist = (ListView) findViewById(R.id.dishes_list);
+		ListView dishlist = (ListView) findViewById(R.id.dishesList);
 		dishlist.setAdapter(dishAdapter);		
 
 		//Find the ID of the restaurant to display

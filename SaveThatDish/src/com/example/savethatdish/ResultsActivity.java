@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -42,9 +43,10 @@ public class ResultsActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.results);
 		
-		ImageButton hamburgerButton = (ImageButton)findViewById(R.id.hamburger);
+		ImageButton hamburgerButton = (ImageButton)findViewById(R.id.hamburger_results);
 		hamburgerButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -55,21 +57,21 @@ public class ResultsActivity extends Activity {
 			}
 		});
 		
-		ImageButton addButton = (ImageButton)findViewById(R.id.add_button);
+		ImageButton addButton = (ImageButton)findViewById(R.id.add_results);
 		addButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent hamburger = new Intent(ResultsActivity.this, SearchActivity.class);
-				startActivity(hamburger);
+				Intent search = new Intent(ResultsActivity.this, SearchActivity.class);
+				startActivity(search);
 			}
 		});
 		
 		listView = (ListView)findViewById(R.id.searchResults);
 		results = SearchActivity.returnResults();
 		addresses = new ArrayList<String>();
-		listButton = (ImageView)findViewById(R.id.left_list_tab_filled);
-		mapButton = (ImageView)findViewById(R.id.right_map_tab_empty);
+		listButton = (ImageView)findViewById(R.id.left_list_tab);
+		mapButton = (ImageView)findViewById(R.id.right_map_tab);
 		mapButton.setDrawingCacheEnabled(true);
 		mapButton.setOnTouchListener(new OnTouchListener() {
 			@Override

@@ -26,7 +26,7 @@
             android:contentDescription="@string/desc"
             android:background="@drawable/search_bar" />
         <ImageView
-            android:id="@+id/searchIcon"
+            android:id="@+id/searchIcon_rest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -42,10 +42,10 @@
             android:minWidth="0dp"
             android:src="@drawable/search_icon" />
         <ImageView
-            android:id="@+id/searchText"
+            android:id="@+id/searchMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft = "@id/searchIcon"
+            android:layout_alignLeft = "@id/searchIcon_rest"
             android:layout_alignTop = "@+id/searchBar"
             android:layout_alignBottom = "@+id/searchBar"
             android:layout_marginTop = "8dp"

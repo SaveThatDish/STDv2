@@ -8,7 +8,7 @@
     android:weightSum="1.0" >
 
     <ImageView
-        android:id="@+id/TopHeaderBuffer"
+        android:id="@+id/topHeaderBuffer_rest"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.02"
@@ -16,14 +16,14 @@
         android:contentDescription="@string/desc" />
 
     <RelativeLayout
-        android:id="@+id/Header"
+        android:id="@+id/Header_rest"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.04"
         android:background="@drawable/universal_background" >
 
         <ImageButton
-            android:id="@+id/hamburgerbutton"
+            android:id="@+id/hamburger_rest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -39,7 +39,7 @@
             android:src="@drawable/hamburger" />
 
         <ImageView
-            android:id="@+id/headerText"
+            android:id="@+id/headerText_rest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -48,7 +48,7 @@
             android:src="@drawable/header_restauranttext" />
 
         <ImageButton
-            android:id="@+id/addbutton"
+            android:id="@+id/add_rest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -65,7 +65,7 @@
     </RelativeLayout>
 
     <ImageView
-        android:id="@+id/BottomHeaderBuffer"
+        android:id="@+id/bottomHeaderBuffer_rest"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.02"
@@ -76,7 +76,7 @@
     <!-- Space being reserved for the map -->
 
     <ImageView
-        android:id="@+id/spaceForMap"
+        android:id="@+id/spaceForMap_rest"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_gravity="center_horizontal"
@@ -85,7 +85,7 @@
         android:contentDescription="@string/desc" />
 
     <LinearLayout
-        android:id="@+id/restOfPage"
+        android:id="@+id/restOfPage_rest"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.67"
@@ -102,7 +102,7 @@
             layout="@layout/label" />
 
         <RelativeLayout
-            android:id="@+id/searchArea"
+            android:id="@+id/searchArea_rest"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
@@ -110,7 +110,7 @@
             android:background="@null" >
 
             <ImageView
-                android:id="@+id/searchIcon"
+                android:id="@+id/searchIcon_rest"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_alignParentLeft="true"
@@ -122,12 +122,12 @@
                 android:src="@drawable/searchicon" />
 
             <AutoCompleteTextView
-                android:id="@+id/searchText"
+                android:id="@+id/searchMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/searchIcon"
+                android:layout_toRightOf="@+id/searchIcon_rest"
                 android:background="@null"
                 android:ems="10"
                 android:textColor="#000000"
@@ -137,7 +137,7 @@
         </RelativeLayout>
 
         <ListView
-            android:id="@+id/dishes_list"
+            android:id="@+id/dishesList"
             android:layout_width="wrap_content"
             android:layout_height="0dip"
             android:layout_marginLeft="20dp"

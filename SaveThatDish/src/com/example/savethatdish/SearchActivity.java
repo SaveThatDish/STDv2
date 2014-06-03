@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -37,9 +38,10 @@ public class SearchActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.search);
 		
-		ImageButton hamburgerButton = (ImageButton)findViewById(R.id.hamburger);
+		ImageButton hamburgerButton = (ImageButton)findViewById(R.id.hamburger_results);
 		hamburgerButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

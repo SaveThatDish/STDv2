@@ -59,8 +59,8 @@ public class MainActivity extends FragmentActivity {
 
 		
 	    // ---------------UNCOMMENT TO TEST APP WITHOUT NEEDING TO LOGIN------------------
-		Intent intent = new Intent(this, SearchActivity.class);//Large Map Activity
-		startActivity(intent);
+		//Intent intent = new Intent(this.SearchActivity.class);//Large Map Activity
+		//startActivity(intent);
 		// -------------------------------------------------------------------------------	
 	    
 	    uiHelper = new UiLifecycleHelper(this, callback);
